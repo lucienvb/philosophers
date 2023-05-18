@@ -17,18 +17,32 @@ static void	*thread_function(void *arg)
 	return message;
 }
 
+static bool	initialize_threads(pthread_t **thread, size_t number_of_threads)
+{
+	*thread = malloc(number_of_threads * sizeof(pthread_t));
+	if (!*thread)
+		return (false);
+	return (true);
+}
+
+static bool	initialize_args(size_t **arg, size_t number_of_threads)
+{
+	*arg = malloc(number_of_threads * sizeof(int));
+	if (!*arg)
+		return (false);
+	return (true);
+}
+
 int thread_main(size_t number_of_philosophers)
 {
 	pthread_t	*thread;
-	int			*arg;
+	size_t	 	*arg;
 	size_t		i;
 	char		**thread_result;
 
-	thread = malloc(number_of_philosophers * sizeof(pthread_t));
-	if (!thread)
+	if (initialize_threads(&thread, number_of_philosophers) == false)
 		return (0);
-	arg = malloc(number_of_philosophers * sizeof(int));
-	if (!arg)
+	if (initialize_args(&arg, number_of_philosophers) == false)
 		return (free(thread), 0);
 	i = 0;
 	while (i < number_of_philosophers)
@@ -40,7 +54,7 @@ int thread_main(size_t number_of_philosophers)
 	while (i < number_of_philosophers)
 	{
 		// maybe free stuff when pthread_create fails (free everything that's previously malloc)
-		if (pthread_create(&thread[i], NULL, thread_function, &arg[i]) != 0)
+		if (pthread_create(&thread[i], NULL, thread_function, (int **) &arg[i]) != 0)
 			return (0);
 		i++;
 	}
