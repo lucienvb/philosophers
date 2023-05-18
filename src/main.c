@@ -22,7 +22,6 @@ int main(int argc, char **argv)
 	valid_number = ft_atol_with_overflow(argv[1], &number_of_philosophers);
 	if (valid_number == false)
 		return (0);
-
 	thread_main(number_of_philosophers);
 	return (0);
 }
