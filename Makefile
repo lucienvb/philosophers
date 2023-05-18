@@ -6,6 +6,7 @@ CC = gcc
 
 # Compiler flags
 CFLAGS = -Wall -Wextra -Werror
+FSAN = -fsanitize=address,undefined -g
 
 # Source files
 SRC = \
@@ -32,11 +33,11 @@ all: $(NAME)
 
 # Main name
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(INC_DIRS) $(OBJ) -o $(NAME)
+	$(CC) $(CFLAGS) $(FSAN) $(INC_DIRS) $(OBJ) -o $(NAME)
 
 # Unit test target
 test: $(UNIT_OBJ) $(OBJ)
-	$(CC) $(CFLAGS) $(INC_DIRS) $(UNIT_OBJ) $(OBJ) $(CRITERION_LIB) -o $@
+	$(CC) $(CFLAGS) $(FSAN) $(INC_DIRS) $(UNIT_OBJ) $(OBJ) $(CRITERION_LIB) -o $@
 	./$@
 
 # Clean up
