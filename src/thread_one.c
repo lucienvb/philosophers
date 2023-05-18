@@ -7,10 +7,10 @@ static void	*thread_function(void *arg)
 	int i;
 
 	i = 1;
-	while (i <= 5)
+	while (i <= 3)
 	{
 		printf("Thread function is running. Argument passed = %d, iteration = %d\n", *(int *)arg, i);
-		usleep(500000);
+		usleep(250000);
 		i++;
 	}
 	char *message = "Thread function is finished\n";
@@ -22,11 +22,7 @@ int thread_main(size_t number_of_philosophers)
 	pthread_t	*thread;
 	int			*arg;
 	size_t		i;
-	char		*thread1_result;
-	char		*thread2_result;
-	char		*thread3_result;
-	char		*thread4_result;
-	char		*thread5_result;
+	char		**thread_result;
 
 	thread = malloc(number_of_philosophers * sizeof(pthread_t));
 	if (!thread)
@@ -43,19 +39,28 @@ int thread_main(size_t number_of_philosophers)
 	i = 0;
 	while (i < number_of_philosophers)
 	{
-		pthread_create(&thread[i], NULL, thread_function, &arg[i]);
+		// maybe free stuff when pthread_create fails (free everything that's previously malloc)
+		if (pthread_create(&thread[i], NULL, thread_function, &arg[i]) != 0)
+			return (0);
 		i++;
 	}
-	pthread_join(thread[0], (void **)&thread1_result);
-	pthread_join(thread[1], (void **)&thread2_result);
-	pthread_join(thread[2], (void **)&thread3_result);
-	pthread_join(thread[3], (void **)&thread4_result);
-	pthread_join(thread[4], (void **)&thread5_result);
-
-	printf("result thread 1: %s\n", thread1_result);
-	printf("result thread 2: %s\n", thread2_result);
-	printf("result thread 3: %s\n", thread3_result);
-	printf("result thread 4: %s\n", thread4_result);
-	printf("result thread 5: %s\n", thread5_result);
+	thread_result = malloc(number_of_philosophers * sizeof(char *));
+	// maybe I have to free more stuff here, check previous allocated memory
+	if (!thread_result)
+		return (free(thread), free(arg), 0);
+	i = 0;
+	while (i < number_of_philosophers)
+	{
+		// maybe free stuff when pthread_join fails (free everything that's previously malloc)
+		if (pthread_join(thread[i], (void **) &thread_result[i]) != 0)
+			return (0);
+		i++;
+	}
+	i = 0;
+	while (i < number_of_philosophers)
+	{
+		printf("result thread %zu: %s\n", i + 1, thread_result[i]);
+		i++;
+	}
 	return 0;
 }
