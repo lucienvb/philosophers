@@ -50,6 +50,7 @@ bool	ft_atol_with_overflow(const char *str, long *result)
 	}
 	if (!iterate_and_create(str, i, len, result))
 		return (false);
+	*result += 1;
 	*result *= sign;
 	return (true);
 }
