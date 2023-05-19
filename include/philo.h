@@ -13,7 +13,12 @@
 
 
 // STRUCTURES
-
+typedef struct s_philo
+{
+	size_t 	*arg;
+	size_t 	time_to_die;
+    size_t  i;
+}			t_philo;
 
 // FUNCTIONS
 bool	philo(char *str);
