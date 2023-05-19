@@ -2,19 +2,26 @@
 #include "../include/philo.h"
 
 
-static void	*thread_function(void *arg)
+static void	*thread_function(void *tmp)
 {
-	int i;
+	size_t	i;
+    size_t  *arg;
+    t_philo *phil;
 
-	i = 1;
-	while (i <= 3)
+    phil = (t_philo *) tmp;
+
+//    arg = &phil->arg[phil->i];
+    arg = &phil->arg[phil->i];
+	i = 0;
+	while (i < phil->time_to_die)
 	{
-		printf("Thread function is running. Argument passed = %d, iteration = %d\n", *(int *)arg, i);
+		printf("Philosopher %d is thinking\n", *(int *) arg);
 		usleep(250000);
 		i++;
 	}
-	char *message = "Thread function is finished\n";
-	return message;
+    if (i == phil->time_to_die)
+        return("philosopher has died\n");
+	return ("philosopher is thinking\n");
 }
 
 static bool	initialize_threads(pthread_t **thread, size_t number_of_threads)
@@ -27,7 +34,7 @@ static bool	initialize_threads(pthread_t **thread, size_t number_of_threads)
 
 static bool	initialize_args(size_t **arg, size_t number_of_threads)
 {
-	*arg = malloc(number_of_threads * sizeof(int));
+	*arg = malloc(number_of_threads * sizeof(size_t));
 	if (!*arg)
 		return (false);
 	return (true);
@@ -35,10 +42,12 @@ static bool	initialize_args(size_t **arg, size_t number_of_threads)
 
 int thread_main(size_t number_of_philosophers)
 {
-	pthread_t	*thread;
-	size_t	 	*arg;
-	size_t		i;
-	char		**thread_result;
+    char		**thread_result;
+    pthread_t	*thread;
+    t_philo		phil;
+    size_t      *arg;
+    size_t		i;
+    t_philo     *thread_phil;
 
 	if (initialize_threads(&thread, number_of_philosophers) == false)
 		return (0);
@@ -47,15 +56,24 @@ int thread_main(size_t number_of_philosophers)
 	i = 0;
 	while (i < number_of_philosophers)
 	{
-		arg[i] = i + 1;
+		arg[i] = i;
 		i++;
 	}
-	i = 0;
+    i = 0;
+	phil.arg = arg;
+    phil.i = 0;
+    phil.time_to_die = 3;
 	while (i < number_of_philosophers)
 	{
+        thread_phil = malloc(sizeof(t_philo));
+        if (!thread_phil)
+            return (0);
+
+        memcpy(thread_phil, &phil, sizeof(t_philo));
 		// maybe free stuff when pthread_create fails (free everything that's previously malloc)
-		if (pthread_create(&thread[i], NULL, thread_function, (int **) &arg[i]) != 0)
+		if (pthread_create(&thread[i], NULL, thread_function, (void *) thread_phil) != 0)
 			return (0);
+        phil.i++;
 		i++;
 	}
 	thread_result = malloc(number_of_philosophers * sizeof(char *));
