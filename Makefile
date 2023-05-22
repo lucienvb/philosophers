@@ -12,8 +12,13 @@ FSAN = -fsanitize=address,undefined -g
 SRC = \
 	src/philosophers.c \
 	src/thread_one.c \
-	src/ft_atol_with_overflow.c \
-	src/main.c
+	src/utils/ft_atol_with_overflow.c \
+	src/main.c \
+	src/thread/thread_print_result.c \
+	src/thread/thread_join.c \
+	src/thread/thread_create.c \
+	src/thread/thread_routine.c \
+	src/initialize/initialize.c
 
 OBJ = $(SRC:.c=.o)
 
