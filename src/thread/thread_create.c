@@ -1,12 +1,13 @@
 #include "include/philo.h"
 
-void	thread_create(size_t number_of_threads, t_philo *phil, pthread_t *thread)
+// WARNING: memcpy still in there
+void	thread_create(t_philo *phil, pthread_t *thread)
 {
     t_philo *thread_phil;
     size_t i;
 
     i = 0;
-    while (i < number_of_threads)
+    while (i < (size_t) phil->number_of_philosophers)
     {
         thread_phil = malloc(sizeof(t_philo));
         if (!thread_phil)

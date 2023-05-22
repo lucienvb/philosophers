@@ -1,5 +1,5 @@
 //#include <philo.h>
-#include "../include/philo.h"
+#include "include/philo.h"
 
 //int	main(void)
 //{
