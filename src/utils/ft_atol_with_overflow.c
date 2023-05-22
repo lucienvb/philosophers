@@ -1,6 +1,6 @@
 #include <limits.h>
 #include <stddef.h>
-#include "../include/philo.h"
+#include "../../include/philo.h"
 
 static size_t ft_strlen(const char *str)
 {
