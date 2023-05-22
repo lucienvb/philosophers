@@ -10,7 +10,6 @@ static void	*thread_function(void *tmp)
 
     phil = (t_philo *) tmp;
 
-//    arg = &phil->arg[phil->i];
     arg = &phil->arg[phil->i];
 	i = 0;
 	while (i < phil->time_to_die)
@@ -40,7 +39,7 @@ static bool	initialize_args(size_t **arg, size_t number_of_threads)
 	return (true);
 }
 
-int thread_main(size_t number_of_philosophers)
+int thread_main(size_t number_of_philosophers, size_t time_to_die)
 {
     char		**thread_result;
     pthread_t	*thread;
@@ -62,7 +61,7 @@ int thread_main(size_t number_of_philosophers)
     i = 0;
 	phil.arg = arg;
     phil.i = 0;
-    phil.time_to_die = 3;
+    phil.time_to_die = time_to_die;
 	while (i < number_of_philosophers)
 	{
         thread_phil = malloc(sizeof(t_philo));

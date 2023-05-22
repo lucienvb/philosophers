@@ -22,7 +22,7 @@ typedef struct s_philo
 
 // FUNCTIONS
 bool	philo(char *str);
-int 	thread_main(size_t number_of_philosophers);
+int 	thread_main(size_t number_of_philosophers, size_t time_to_die);
 bool	ft_atol_with_overflow(const char *str, long *result);
 
 #endif

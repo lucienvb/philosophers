@@ -15,6 +15,7 @@
 int main(int argc, char **argv)
 {
 	long	number_of_philosophers;
+	long	time_to_die;
 	bool	valid_number;
 
 	if (argc != 5)
@@ -22,6 +23,9 @@ int main(int argc, char **argv)
 	valid_number = ft_atol_with_overflow(argv[1], &number_of_philosophers);
 	if (valid_number == false)
 		return (0);
-	thread_main(number_of_philosophers);
+	valid_number = ft_atol_with_overflow(argv[2], &time_to_die);
+	if (valid_number == false)
+		return (0);
+	thread_main(number_of_philosophers, time_to_die);
 	return (0);
 }
