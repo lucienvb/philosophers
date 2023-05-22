@@ -10,7 +10,7 @@ int thread_main(t_philo *phil)
     thread_result = NULL;
     arg = NULL;
     initialize(phil, &thread_result, &thread, arg);
-    thread_create(phil->number_of_philosophers, phil, thread);
+    thread_create(phil, thread);
    	// maybe free stuff when pthread_join fails (free everything that's previously malloc)
 	if (thread_join(phil->number_of_philosophers, thread, thread_result) == false)
 		return (0);
