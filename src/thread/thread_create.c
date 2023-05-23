@@ -1,22 +1,21 @@
 #include "include/philo.h"
 
 // WARNING: memcpy still in there
-void	thread_create(t_philo *phil, pthread_t *thread)
+void	thread_create(t_shared *shared_resources, pthread_t *thread)
 {
-    t_philo *thread_phil;
-    size_t i;
+	size_t i;
 
-    i = 0;
-    while (i < (size_t) phil->number_of_philosophers)
+	i = 0;
+    while (i < (size_t) shared_resources->phil.number_of_philosophers)
     {
-        thread_phil = malloc(sizeof(t_philo));
-        if (!thread_phil)
+		shared_resources->copy = malloc(sizeof(t_unshared));
+        if (!shared_resources->copy)
             return ;
-        memcpy(thread_phil, phil, sizeof(t_philo));
+        ft_memcpy(shared_resources->copy, &shared_resources->phil, sizeof(t_unshared));
         // maybe free stuff when pthread_create fails (free everything that's previously malloc)
-        if (pthread_create(&thread[i], NULL, thread_routine, (void *) thread_phil) != 0)
+        if (pthread_create(&thread[i], NULL, thread_routine, (void *) shared_resources) != 0)
             return ;
-        phil->i++;
+        shared_resources->phil.i++;
         i++;
     }
 }

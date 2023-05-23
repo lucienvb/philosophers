@@ -13,6 +13,7 @@ SRC = \
 	src/philosophers.c \
 	src/thread/thread_main.c \
 	src/utils/ft_atol_with_overflow.c \
+	src/utils/ft_memcpy.c \
 	src/main.c \
 	src/thread/thread_print_result.c \
 	src/thread/thread_join.c \

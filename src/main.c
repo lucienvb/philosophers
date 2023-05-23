@@ -12,7 +12,7 @@
 //	return(0);
 //}
 
-static bool prepare_arguments(char **argv, t_philo *phil)
+static bool prepare_arguments(char **argv, t_unshared *phil)
 {
     bool	valid_number;
 
@@ -34,12 +34,12 @@ static bool prepare_arguments(char **argv, t_philo *phil)
 
 int main(int argc, char **argv)
 {
-	t_philo phil;
+	t_shared	shared_resources;
 
 	if (argc != 5)
 		return (0);
-    if (prepare_arguments(argv, &phil) == false)
+    if (prepare_arguments(argv, &shared_resources.phil) == false)
         return (0);
-	thread_main(&phil);
+	thread_main(&shared_resources);
 	return (0);
 }

@@ -1,7 +1,7 @@
 //#include "philo.h"
 #include "../../include/philo.h"
 
-int thread_main(t_philo *phil)
+int thread_main(t_shared *shared_resources)
 {
     char			**thread_result;
     pthread_t 		*thread;
@@ -9,11 +9,11 @@ int thread_main(t_philo *phil)
 
     thread_result = NULL;
     arg = NULL;
-	initialize(phil, &thread_result, &thread, arg);
-    thread_create(phil, thread);
+	initialize(&shared_resources->phil, &thread_result, &thread, arg);
+    thread_create(shared_resources, thread);
    	// maybe free stuff when pthread_join fails (free everything that's previously malloc)
-	if (thread_join(phil->number_of_philosophers, thread, thread_result) == false)
+	if (thread_join(shared_resources->phil.number_of_philosophers, thread, thread_result) == false)
 		return (0);
-    thread_print_result(phil->number_of_philosophers, thread_result);
+    thread_print_result(shared_resources->phil.number_of_philosophers, thread_result);
 	return (0);
 }
