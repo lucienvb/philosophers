@@ -1,7 +1,7 @@
 #include "include/philo.h"
 
 // WARNING: memcpy still in there
-void	thread_create(t_philo *phil, pthread_t *thread, pthread_mutex_t *mutex)
+void	thread_create(t_philo *phil, pthread_t *thread, pthread_mutex_t **mutex)
 {
     t_philo *thread_phil;
     size_t i;
