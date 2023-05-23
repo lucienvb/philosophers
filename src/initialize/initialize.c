@@ -37,7 +37,7 @@ static bool	initialize_thread_result(size_t number_of_threads, char ***thread_re
     return (true);
 }
 
-bool initialize(t_unshared *phil, char ***thread_result, pthread_t **thread, size_t *arg)
+bool initialize(t_philo *phil, char ***thread_result, pthread_t **thread, size_t *arg)
 {
     if (initialize_thread(thread, phil->number_of_philosophers) == false)
         return (false);
