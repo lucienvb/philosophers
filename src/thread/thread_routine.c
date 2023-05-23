@@ -5,20 +5,20 @@ void	*thread_routine(void *tmp)
 {
     size_t			i;
     size_t			*arg;
-    t_shared		*shared_resources;
+    t_philo			*phil;
 //	pthread_mutex_t	mutex;
 
-	shared_resources = (t_shared *) tmp;
-	pthread_mutex_init(&shared_resources->mutex, NULL);
+//	pthread_mutex_init(&mutex, NULL);
+    phil = (t_philo *) tmp;
 
-    arg = &shared_resources->copy->arg[shared_resources->copy->i];
+    arg = &phil->arg[phil->i];
     i = 0;
 	printf("Philosopher %d is thinking\n", *(int *) arg);
-	if (pthread_mutex_lock(&shared_resources->mutex) == 0)
+	if (pthread_mutex_lock(phil->mutex) == 0)
 	{
 		printf("Philosopher %d is eating\n", *(int *) arg);
-		usleep(shared_resources->copy->time_to_eat * ten_power_six);
-		pthread_mutex_unlock(&shared_resources->mutex);
+		usleep(phil->time_to_eat * ten_power_six);
+		pthread_mutex_unlock(phil->mutex);
 	}
 //    while (i < (size_t) phil->time_to_die)
 //    {
@@ -26,8 +26,8 @@ void	*thread_routine(void *tmp)
 //        usleep(250000);
 //        i++;
 //    }
-    if (i == (size_t) shared_resources->copy->time_to_die)
-        return("philosopher has died");
-	pthread_mutex_destroy(&shared_resources->mutex);
-    return ("philosopher is thinking");
+    if (i == (size_t) phil->time_to_die)
+        return("philosopher has died\n");
+//	pthread_mutex_destroy(&mutex);
+    return ("philosopher is thinking\n");
 }
