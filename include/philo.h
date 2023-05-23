@@ -20,7 +20,7 @@ typedef struct s_philo
 	long			time_to_die;
     long			time_to_eat;
     long			time_to_sleep;
-//	pthread_mutex_t	mutex;
+	pthread_mutex_t	*mutex;
     size_t  i;
 }			t_philo;
 
@@ -35,7 +35,7 @@ bool    initialize(t_philo *phil, char ***thread_result, pthread_t **thread, siz
 // THREAD
 void    thread_print_result(size_t number_of_threads, char **thread_result);
 bool	thread_join(size_t number_of_threads, pthread_t *thread, char **thread_result);
-void	thread_create(t_philo *phil, pthread_t *thread);
+void	thread_create(t_philo *phil, pthread_t *thread, pthread_mutex_t *mutex);
 void	*thread_routine(void *tmp);
 
 #endif

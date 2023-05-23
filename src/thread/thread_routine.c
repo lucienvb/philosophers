@@ -6,19 +6,19 @@ void	*thread_routine(void *tmp)
     size_t			i;
     size_t			*arg;
     t_philo			*phil;
-	pthread_mutex_t	mutex;
+//	pthread_mutex_t	mutex;
 
-	pthread_mutex_init(&mutex, NULL);
+//	pthread_mutex_init(&mutex, NULL);
     phil = (t_philo *) tmp;
 
     arg = &phil->arg[phil->i];
     i = 0;
 	printf("Philosopher %d is thinking\n", *(int *) arg);
-	if (pthread_mutex_lock(&mutex) == 0)
+	if (pthread_mutex_lock(phil->mutex) == 0)
 	{
 		printf("Philosopher %d is eating\n", *(int *) arg);
 		usleep(phil->time_to_eat * ten_power_six);
-		pthread_mutex_unlock(&mutex);
+		pthread_mutex_unlock(phil->mutex);
 	}
 //    while (i < (size_t) phil->time_to_die)
 //    {
@@ -28,6 +28,6 @@ void	*thread_routine(void *tmp)
 //    }
     if (i == (size_t) phil->time_to_die)
         return("philosopher has died\n");
-	pthread_mutex_destroy(&mutex);
+//	pthread_mutex_destroy(&mutex);
     return ("philosopher is thinking\n");
 }
