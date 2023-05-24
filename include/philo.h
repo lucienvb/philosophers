@@ -9,6 +9,8 @@
 # include <pthread.h>
 # include <stdlib.h>
 # include <assert.h>
+#include <limits.h>
+#include <stddef.h>
 
 // DEFINE
 # define THOUSAND 1000
