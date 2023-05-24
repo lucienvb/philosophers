@@ -19,8 +19,9 @@ SRC_DIR		:= src
 BUILD_DIR 	:= build
 MAIN 		:= main.c
 INCLUDE_DIR	:= include
-HEADERS		= $(INCLUDE_DIR)/philo.h
 RM			:= rm -rvf
+
+HEADERS		= $(INCLUDE_DIR)/philo.h
 CC 			= gcc
 
 ################################################################################
