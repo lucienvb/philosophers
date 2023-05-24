@@ -42,7 +42,7 @@ int thread_main(t_philo *phil)
 
     thread_result = NULL;
     arg = NULL;
-	initialize(phil, &thread_result, &thread, arg);
+	assert(initialize(phil, &thread_result, &thread, arg));
 	if (mutex_initialize(&mutex, phil->number_of_philosophers) == false)
 		return (0);
 	thread_create(phil, thread, &mutex);

@@ -8,9 +8,10 @@
 # include <stdio.h>
 # include <pthread.h>
 # include <stdlib.h>
+# include <assert.h>
 
 // DEFINE
-# define ten_power_six 1000000
+# define THOUSAND 1000
 
 // STRUCTURES
 typedef struct s_philo
@@ -20,7 +21,8 @@ typedef struct s_philo
 	long			time_to_die;
     long			time_to_eat;
     long			time_to_sleep;
-	pthread_mutex_t	**mutex;
+	pthread_mutex_t	*mutex;
+//	pthread_mutex_t stop;
     size_t  		i;
 }			t_philo;
 
