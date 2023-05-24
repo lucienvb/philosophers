@@ -1,4 +1,4 @@
-#include "include/philo.h"
+#include <philo.h>
 
 void thread_print_result(size_t number_of_threads, char **thread_result)
 {

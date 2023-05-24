@@ -1,4 +1,4 @@
-#include "include/philo.h"
+#include <philo.h>
 
 // Need to fix that all the threads use the same mutexes and not copies of the same mutexes like now
 void	*thread_routine(void *tmp)

@@ -45,5 +45,6 @@ void	*thread_routine(void *tmp);
 // UTILS
 bool	ft_atol_with_overflow(const char *str, long *result);
 void	*ft_memcpy(void *dst, void *src, size_t n);
+bool 	prepare_arguments(char **argv, t_philo *phil);
 
 #endif

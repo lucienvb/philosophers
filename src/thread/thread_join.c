@@ -1,4 +1,4 @@
-#include "include/philo.h"
+#include <philo.h>
 
 bool	thread_join(size_t number_of_threads, pthread_t *thread, char **thread_result)
 {

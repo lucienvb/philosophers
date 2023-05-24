@@ -1,4 +1,4 @@
-#include "include/philo.h"
+#include <philo.h>
 
 static bool	initialize_thread(pthread_t **thread, size_t number_of_threads)
 {

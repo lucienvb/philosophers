@@ -1,4 +1,4 @@
-#include "../../include/philo.h"
+#include <philo.h>
 
 void	*ft_memcpy(void *dst, void *src, size_t n)
 {

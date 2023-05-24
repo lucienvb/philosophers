@@ -1,5 +1,4 @@
-//#include "philo.h"
-#include "../../include/philo.h"
+#include <philo.h>
 
 static bool	mutex_initialize(pthread_mutex_t **mutex, size_t number_of_philosophers)
 {

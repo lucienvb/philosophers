@@ -1,4 +1,4 @@
-#include "include/philo.h"
+#include <philo.h>
 
 void	thread_create(t_philo *phil, pthread_t *thread, pthread_mutex_t **mutex)
 {
