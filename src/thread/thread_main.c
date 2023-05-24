@@ -17,7 +17,7 @@ static bool	mutex_initialize(pthread_mutex_t **mutex, size_t number_of_philosoph
 	return (true);
 }
 
-static bool	mutex_destroy(pthread_mutex_t *mutex, size_t number_of_philosophers)
+bool	mutex_destroy(pthread_mutex_t *mutex, size_t number_of_philosophers)
 {
 	size_t i;
 

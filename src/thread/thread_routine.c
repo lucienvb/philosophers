@@ -48,6 +48,6 @@ void	*thread_routine(void *tmp)
 		usleep(phil->time_to_sleep * THOUSAND);
 		printf("Philosopher %d is thinking\n", *(int *) arg);
 	}
-
+	printf("Philosopher %d has died\n", *(int *) arg);
     return ("Philosopher has died\n");
 }
