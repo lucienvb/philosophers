@@ -23,7 +23,7 @@ static void	set_arg(size_t number_of_threads, size_t *arg)
     i = 0;
     while (i < number_of_threads)
     {
-        arg[i] = i;
+        arg[i] = i + 1;
         i++;
     }
 }

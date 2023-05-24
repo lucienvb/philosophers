@@ -36,6 +36,7 @@ SRC = \
 	thread/thread_main.c \
 	utils/ft_atol_with_overflow.c \
 	utils/ft_memcpy.c \
+	utils/prepare_arguments.c \
 	thread/thread_print_result.c \
 	thread/thread_join.c \
 	thread/thread_create.c \
