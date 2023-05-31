@@ -1,20 +1,32 @@
 #include "../include/unit_test.h"
 //#include <unit_test.h>
-#include <criterion/redirect.h>
+//#include <criterion/redirect.h>
 
 /*******************************************************************************/
-/*                                basic_cases                                  */
+/*                                parser_cases                                 */
 /*******************************************************************************/
 
-Test(philo, basic_test)
+static void	parser_cases(int input, bool expected_status)
 {
 	bool	status;
 
-	cr_redirect_stdout();
-	status = philo("hallo");
-//	cr_assert_eq(status, false);
-//	cr_assert_eq(status, true);
-
-	cr_assert_eq(status, true);
-	cr_assert_stdout_eq_str("hallo");
+	status = false;
+	status = parser(input);
+	cr_assert_eq(status, expected_status);
 }
+
+Test(parser, to_low)
+{
+	parser_cases(4, false);
+}
+
+Test(parser, exact_five)
+{
+	parser_cases(5, true);
+}
+
+Test(parser, to_high)
+{
+	parser_cases(6, false);
+}
+

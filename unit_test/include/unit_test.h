@@ -27,11 +27,14 @@
 # include <criterion/parameterized.h>
 # include <criterion/stats.h>
 # include <criterion/types.h>
-# include "include/philo.h"
+//# include <philo.h>
 # include <criterion/assert.h>
 # include <criterion/internal/assert.h>
 # include "custom_malloc.h"
 
 void redirect_all_std(void);
+
+// function to test
+bool	parser(int argc);
 
 #endif
