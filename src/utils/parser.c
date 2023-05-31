@@ -1,3 +1,8 @@
-//
-// Created by Lucien van Bussel on 31/05/2023.
-//
+#include <philo.h>
+
+bool	parser(int argc)
+{
+	if (argc != 5)
+		return (false);
+	return (true);
+}
