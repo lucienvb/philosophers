@@ -45,10 +45,11 @@ SRC = \
   thread/thread_join.c \
   thread/thread_create.c \
   thread/thread_routine.c \
-  initialize/initialize.c
+  initialize/initialize.c \
+  utils/parser.c
 
 TEST_SRC = \
-  src/test.c
+  src/utils/parser.c
 
 UNIT_SRC = \
   unit_test/src/philo_test.c
@@ -84,7 +85,7 @@ $(MAIN_OBJ) $(OBJS): $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c | $(HEADER)
 ################################################################################
 
 test:
-	$(CC) $(WFLAGS) $(BEEBOE) $(FSAN) $(CRIT_FLAG) $(INC_UNIT) $(LIB_UNIT) $(TEST_SRC) $(UNIT_SRC) -o $(UNIT_OUT)
+	$(CC) $(WFLAGS) $(BEEBOE) $(FSAN) $(CRIT_FLAG) $(INCLUDE_FLAGS) $(INC_UNIT) $(LIB_UNIT) $(TEST_SRC) $(UNIT_SRC) -o $(UNIT_OUT)
 	@printf "$(BLUE_FG)$(UNIT_OUT)$(RESET_COLOR) created\n"
 	@./$(UNIT_OUT)
 .PHONY: test
