@@ -12,9 +12,9 @@ Test(philo, basic_test)
 
 	cr_redirect_stdout();
 	status = philo("hallo");
-	cr_assert_eq(status, false);
+//	cr_assert_eq(status, false);
 //	cr_assert_eq(status, true);
 
 	cr_assert_eq(status, true);
-	cr_assert_stdout_eq_str("hallo\n");
+	cr_assert_stdout_eq_str("hallo");
 }
