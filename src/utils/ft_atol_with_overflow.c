@@ -38,6 +38,11 @@ bool	ft_atol_with_overflow(const char *str, long *result)
 	if (!str)
 		return (1);
 	len = ft_strlen(str);
+	if (len == 1 && str[0] == ZERO)
+	{
+		*result = 0;
+		return (true);
+	}
 	while (str[i] == 32 || (str[i] >= 9 && str[i] <= 13))
 		i++;
 	if (str[i] == '-' || str[i] == '+')
@@ -48,7 +53,7 @@ bool	ft_atol_with_overflow(const char *str, long *result)
 	}
 	if (!iterate_and_create(str, i, len, result))
 		return (false);
-	*result += 1;
+//	*result += 1;
 	*result *= sign;
 	return (true);
 }

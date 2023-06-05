@@ -14,27 +14,26 @@
 
 // DEFINE
 # define THOUSAND 1000
+# define ZERO 0
 
 // It is possible to make a shared pool readonly with only constant variable, then data races are not possible
 // DATA POOL STRUCT
-//typdef struct s_data_pool
-//{
-//	pthread_mutex_t **mutex;
-//	bool			should_stop;
-//	bool 			is_dead;
-//}					t_data_pool;
+typedef struct s_shared
+{
+	pthread_mutex_t dead;
+	bool			stop;
+}					t_shared;
 
 // PHILO STRUCT
 typedef struct s_philo
 {
 	size_t			*arg;
-    long			number_of_philosophers;
+    long    		number_of_philosophers;
 	long			time_to_die;
     long			time_to_eat;
     long			time_to_sleep;
-//	pthread_mutex_t	*left_fork;
-//	pthread_mutex_t *right_fork;
 	pthread_mutex_t *mutex;
+    t_shared		*data_pool;
     size_t  		i;
 }			t_philo;
 

@@ -46,7 +46,13 @@ bool initialize(t_philo *phil, char ***thread_result, pthread_t **thread, size_t
     set_arg(phil->number_of_philosophers, arg);
     phil->arg = arg;
     phil->i = 0;
-    //	maybe I have to free more stuff here, check previous allocated memory
+	phil->data_pool = NULL;
+
+	// data pool
+//	phil->data_pool->stop = false;
+	//
+
+	//	maybe I have to free more stuff here, check previous allocated memory
     if (initialize_thread_result(phil->number_of_philosophers, thread_result) == false)
         return (false);
     return (true);
