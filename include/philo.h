@@ -50,8 +50,8 @@ bool    initialize(t_philo *phil, char ***thread_result, pthread_t **thread, siz
 bool	mutex_destroy(pthread_mutex_t *mutex, size_t number_of_philosophers);
 
 // THREAD
-void    thread_print_result(size_t number_of_threads, char **thread_result);
-bool	thread_join(size_t number_of_threads, pthread_t *thread, char **thread_result);
+void    thread_print_result(size_t number_of_philosopherss, char **thread_result);
+bool	thread_join(size_t number_of_philosopherss, pthread_t *thread, char **thread_result);
 void	thread_create(t_philo *phil, pthread_t *thread, pthread_mutex_t **mutex);
 void	*thread_routine(void *tmp);
 

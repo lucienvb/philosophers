@@ -1,36 +1,36 @@
 #include <philo.h>
 
-static bool	initialize_thread(pthread_t **thread, size_t number_of_threads)
+static bool	initialize_thread(pthread_t **thread, size_t number_of_philosophers)
 {
-    *thread = malloc(number_of_threads * sizeof(pthread_t));
+    *thread = malloc(number_of_philosophers * sizeof(pthread_t));
     if (!*thread)
         return (false);
     return (true);
 }
 
-static bool	initialize_arg(size_t **arg, size_t number_of_threads)
+static bool	initialize_arg(size_t **arg, size_t number_of_philosophers)
 {
-    *arg = malloc(number_of_threads * sizeof(size_t));
+    *arg = malloc(number_of_philosophers * sizeof(size_t));
     if (!*arg)
         return (false);
     return (true);
 }
 
-static void	set_arg(size_t number_of_threads, size_t *arg)
+static void	set_arg(size_t number_of_philosophers, size_t *arg)
 {
     size_t i;
 
     i = 0;
-    while (i < number_of_threads)
+    while (i < number_of_philosophers)
     {
         arg[i] = i + 1;
         i++;
     }
 }
 
-static bool	initialize_thread_result(size_t number_of_threads, char ***thread_result)
+static bool	initialize_thread_result(size_t number_of_philosophers, char ***thread_result)
 {
-    *thread_result = malloc(number_of_threads * sizeof(char *));
+    *thread_result = malloc(number_of_philosophers * sizeof(char *));
     // maybe I have to free more stuff here, check previous allocated memory
     if (!*thread_result)
         return (false);
