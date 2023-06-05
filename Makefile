@@ -14,25 +14,30 @@ include makerc/colors.mk
 
 ################################################################################
 
-NAME          := philo
-UNIT_OUT      := test.out
-SRC_DIR       := src
-BUILD_DIR     := build
-MAIN          := main.c
-INCLUDE_DIR   := include
-RM            := rm -rvf
+NAME			:= philo
+UNIT_OUT		:= test.out
+SRC_DIR			:= src
+BUILD_DIR		:= build
+MAIN			:= main.c
+INCLUDE_DIR		:= include
+RM				:= rm -rvf
 
-HEADERS       = $(INCLUDE_DIR)/philo.h
-CC            = gcc
+HEADERS			= $(INCLUDE_DIR)/philo.h
+CC				= gcc
 
 ################################################################################
 
-CFLAGS        = -Wall -Wextra -Werror$(if $(FSAN), -g -fsanitize=thread)$(if $(DEBUG), -g)
-WFLAGS        = -Wall -Wextra -Werror
-FSAN          = -fsanitize=address,undefined
-EXTRA_FLAGS   = -g -MMD -MP
-INCLUDE_FLAGS := $(addprefix -I, $(sort $(dir $(HEADERS))))
-CRIT_FLAG     = -lcriterion
+CFLAGS			= -Wall -Wextra -Werror -Wpedantic
+INCLUDE_FLAGS	:= $(addprefix -I, $(sort $(dir $(HEADERS))))
+CRIT_FLAG		= -lcriterion
+
+ifdef	DEBUG
+	CFLAGS		+=-g
+endif
+
+ifdef	FSAN
+	CFLAGS		+=-fsanitize=address,undefined
+endif
 
 ################################################################################
 
@@ -75,6 +80,9 @@ all: $(NAME)
 
 $(NAME): SHELL :=/bin/bash
 
+unit_test: $(UNIT_OUT) all
+.PHONY: unit_test
+
 $(NAME): $(OBJS) $(MAIN_OBJ)
 	$(CC) $(CFLAGS) $^ $(INCLUDE_FLAGS) -o $(NAME)
 	@printf "$(BLUE_FG)$(NAME)$(RESET_COLOR) created\n"
@@ -85,17 +93,38 @@ $(MAIN_OBJ) $(OBJS): $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c | $(HEADER)
 
 ################################################################################
 
-test:
-	$(CC) $(WFLAGS) $(EXTRA_FLAGS) $(FSAN) $(CRIT_FLAG) $(INCLUDE_FLAGS) $(INC_UNIT) $(LIB_UNIT) $(TEST_SRC) $(UNIT_SRC) -o $(UNIT_OUT)
+$(UNIT_OUT):
+	$(CC) $(CFLAGS) $(CRIT_FLAG) $(INCLUDE_FLAGS) $(INC_UNIT) $(LIB_UNIT) $(TEST_SRC) $(UNIT_SRC) -o $(UNIT_OUT)
 	@printf "$(BLUE_FG)$(UNIT_OUT)$(RESET_COLOR) created\n"
+	@#$(RM) test.* unit_test/include/*.gch
+
+test:
+	@$(MAKE) DEBUG=1 FSAN=1 unit_test
 	@./$(UNIT_OUT)
 .PHONY: test
+
+retest: fclean test
+.PHONY: retest
 
 uclean:
 	@$(RM) test.* unit_test/include/*.gch
 
 clean:
 	@$(RM) $(OBJS) $(MAIN_OBJ)
+
+debug:
+	$(MAKE) DEBUG=1
+.PHONY: debug
+
+rebug: fclean debug
+.PHONY: rebug
+
+fsan:
+	$(MAKE) DEBUG=1 FSAN=1
+.PHONY: debug
+
+resan: fclean fsan
+.PHONY: resan
 
 fclean: clean
 
