@@ -30,7 +30,7 @@ CC            = gcc
 CFLAGS        = -Wall -Wextra -Werror$(if $(FSAN), -g -fsanitize=thread)$(if $(DEBUG), -g)
 WFLAGS        = -Wall -Wextra -Werror
 FSAN          = -fsanitize=address,undefined
-BEEBOE        = -g -MMD -MP
+EXTRA_FLAGS   = -g -MMD -MP
 INCLUDE_FLAGS := $(addprefix -I, $(sort $(dir $(HEADERS))))
 CRIT_FLAG     = -lcriterion
 
@@ -41,6 +41,7 @@ SRC = \
   thread/thread_main.c \
   utils/ft_atol_with_overflow.c \
   utils/ft_memcpy.c \
+  utils/prepare_arguments.c \
   thread/thread_print_result.c \
   thread/thread_join.c \
   thread/thread_create.c \
@@ -85,7 +86,7 @@ $(MAIN_OBJ) $(OBJS): $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c | $(HEADER)
 ################################################################################
 
 test:
-	$(CC) $(WFLAGS) $(BEEBOE) $(FSAN) $(CRIT_FLAG) $(INCLUDE_FLAGS) $(INC_UNIT) $(LIB_UNIT) $(TEST_SRC) $(UNIT_SRC) -o $(UNIT_OUT)
+	$(CC) $(WFLAGS) $(EXTRA_FLAGS) $(FSAN) $(CRIT_FLAG) $(INCLUDE_FLAGS) $(INC_UNIT) $(LIB_UNIT) $(TEST_SRC) $(UNIT_SRC) -o $(UNIT_OUT)
 	@printf "$(BLUE_FG)$(UNIT_OUT)$(RESET_COLOR) created\n"
 	@./$(UNIT_OUT)
 .PHONY: test
