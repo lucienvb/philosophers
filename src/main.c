@@ -6,8 +6,9 @@ int main(int argc, char **argv)
 
 	if (parser(argc) == false)
 		return (0);
-    if (prepare_arguments(argv, &phil) == false)
-        return (0);
+    if (prepare_arguments(argv, &phil) == false) {
+		return (0);
+	}
 	thread_main(&phil);
 	return (0);
 }
