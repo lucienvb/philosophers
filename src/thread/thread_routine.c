@@ -33,21 +33,20 @@ void	*thread_routine(void *tmp)
 		i++;
 		if ((pthread_mutex_lock(&phil->mutex[phil->i]) == 0 && pthread_mutex_lock(&phil->mutex[previous_mutex_index])) == 0)
 		{
-			printf("Philosopher %d has taken a fork\n", *(int *) arg);
 			printf("Philosopher %d is eating\n", *(int *) arg);
 			usleep(phil->time_to_eat * THOUSAND);
 			if (pthread_mutex_unlock(&phil->mutex[phil->i]) != 0)
 				return ("unlocking mutex failed\n");
 			if (pthread_mutex_unlock(&phil->mutex[previous_mutex_index]) != 0)
 				return ("unlocking mutex failed\n");
+			i = 0;
+			printf("Philosopher %d is sleeping\n", *(int *) arg);
+			usleep(phil->time_to_sleep * THOUSAND);
+			printf("Philosopher %d is thinking\n", *(int *) arg);
 		}
-		else
-			return ("locking mutex failed\n");
-		i = 0;
-		printf("Philosopher %d is sleeping\n", *(int *) arg);
-		usleep(phil->time_to_sleep * THOUSAND);
-		printf("Philosopher %d is thinking\n", *(int *) arg);
+//		break ;
 	}
-	printf("Philosopher %d has died\n", *(int *) arg);
+	free(phil);
+//	printf("Philosopher %d has died\n", *(int *) arg);
     return ("Philosopher has died\n");
 }

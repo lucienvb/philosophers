@@ -48,6 +48,6 @@ bool initialize(t_philo *phil, char ***thread_result, pthread_t **thread, size_t
     phil->i = 0;
     //	maybe I have to free more stuff here, check previous allocated memory
     if (initialize_thread_result(phil->number_of_philosophers, thread_result) == false)
-        return (false);
+		return (free(*thread), free(arg), false);
     return (true);
 }
