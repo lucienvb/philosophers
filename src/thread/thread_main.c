@@ -33,9 +33,12 @@ bool	mutex_destroy(pthread_mutex_t *mutex, size_t number_of_philosophers)
 
 static void	clean_up(pthread_t *thread, char **thread_result, pthread_mutex_t *mutex)
 {
-	free(thread);
-	free(thread_result);
-	free(mutex);
+	if (thread)
+		free(thread);
+	if (thread_result)
+		free(thread_result);
+	if (mutex)
+		free(mutex);
 }
 
 int thread_main(t_philo *phil)
@@ -48,13 +51,13 @@ int thread_main(t_philo *phil)
 	if (initialize(phil, &thread_result, &thread) == false)
         return (0);
 	if (mutex_initialize(&mutex, phil->number_of_philosophers) == false)
-		return (0);
+		return (clean_up(thread, thread_result, NULL), 0);
 	thread_create(phil, thread, &mutex);
 	if (thread_join(phil->number_of_philosophers, thread, thread_result) == false)
-		return (0);
+		return (clean_up(thread, thread_result, mutex), 0);
     thread_print_result(phil->number_of_philosophers, thread_result);
 	if (mutex_destroy(mutex, phil->number_of_philosophers) == false)
-		return (0);
+		return (clean_up(thread, thread_result, mutex), 0);
 	clean_up(thread, thread_result, mutex);
     free(phil->id);
 	return (0);
