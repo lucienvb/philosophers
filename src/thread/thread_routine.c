@@ -13,15 +13,15 @@ void	*thread_routine(void *tmp)
 	if (previous_mutex_index == -1)
 		previous_mutex_index = phil->number_of_philosophers - 1;
     id = &phil->id[phil->i];
-	printf("---------------------------------\n");
-	printf("Philosopher %d:\n", *(int *) id);
-	printf("current_mutex_index: %zu\n", phil->i);
-	printf("previous_mutex_index: %i\n", previous_mutex_index);
+//	printf("---------------------------------\n");
+//	printf("Philosopher %d:\n", *(int *) id);
+//	printf("current_mutex_index: %zu\n", phil->i);
+//	printf("previous_mutex_index: %i\n", previous_mutex_index);
 //	printf("number of philosophers: %zu\n", phil->number_of_philosophers);
 //	printf("time to die: %zu\n", phil->time_to_die);
 //	printf("time to eat: %zu\n", phil->time_to_eat);
 //	printf("time to sleep: %zu\n", phil->time_to_sleep);
-	printf("---------------------------------\n\n");
+//	printf("---------------------------------\n\n");
 	i = 0;
 	if (phil->number_of_philosophers == 1)
 	{
@@ -40,9 +40,9 @@ void	*thread_routine(void *tmp)
 			if (pthread_mutex_unlock(&phil->mutex[previous_mutex_index]) != 0)
 				return ("unlocking mutex failed\n");
 			i = 0;
-			printf("Philosopher %d is sleeping\n", *(int *) id);
-			usleep(phil->time_to_sleep * THOUSAND);
-			printf("Philosopher %d is thinking\n", *(int *) id);
+//			printf("Philosopher %d is sleeping\n", *(int *) id);
+//			usleep(phil->time_to_sleep * THOUSAND);
+//			printf("Philosopher %d is thinking\n", *(int *) id);
 		}
 		break ;
 	}
