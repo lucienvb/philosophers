@@ -13,7 +13,6 @@ void	thread_create(t_philo *phil, pthread_t *thread, pthread_mutex_t **mutex)
             return ;
         ft_memcpy(thread_phil, phil, sizeof(t_philo));
 		thread_phil->mutex = *mutex;
-        // maybe free stuff when pthread_create fails (free everything that's previously malloc)
         if (pthread_create(&thread[i], NULL, thread_routine, (void *) thread_phil) != 0)
 		{
 			free(thread_phil);
@@ -21,6 +20,5 @@ void	thread_create(t_philo *phil, pthread_t *thread, pthread_mutex_t **mutex)
 		}
         phil->i++;
         i++;
-//		free(thread_phil);
     }
 }

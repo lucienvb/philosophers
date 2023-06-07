@@ -27,7 +27,7 @@
 // PHILO STRUCT
 typedef struct s_philo
 {
-	size_t			*arg;
+	size_t			*id;
     long			number_of_philosophers;
 	long			time_to_die;
     long			time_to_eat;
@@ -44,7 +44,7 @@ int 	thread_main(t_philo *phil);
 
 
 // INITIALIZE
-bool    initialize(t_philo *phil, char ***thread_result, pthread_t **thread, size_t *arg);
+bool    initialize(t_philo *phil, char ***thread_result, pthread_t **thread);
 
 // MUTEX
 bool	mutex_destroy(pthread_mutex_t *mutex, size_t number_of_philosophers);
