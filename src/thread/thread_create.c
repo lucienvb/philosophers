@@ -1,24 +1,24 @@
 #include <philo.h>
 
-void	thread_create(t_philo *phil, pthread_t *thread, pthread_mutex_t **mutex)
+void	thread_create(t_public *data_pool, t_philo *phil, pthread_t *thread)
 {
-    t_philo *thread_phil;
-    size_t i;
+    t_philo		*thread_phil;
 
-    i = 0;
-    while (i < (size_t) phil->number_of_philosophers)
+	pthread_mutex_lock(&data_pool->start_mutex);
+	while (phil->i < (size_t) data_pool->number_of_philosophers)
     {
         thread_phil = malloc(sizeof(t_philo));
         if (!thread_phil)
             return ;
         ft_memcpy(thread_phil, phil, sizeof(t_philo));
-		thread_phil->mutex = *mutex;
-        if (pthread_create(&thread[i], NULL, thread_routine, (void *) thread_phil) != 0)
+		phil = thread_phil;
+		phil->data_pool = data_pool;
+        if (pthread_create(&thread[phil->i], NULL, thread_routine, (void *) phil) != 0)
 		{
 			free(thread_phil);
 			return ;
 		}
-        phil->i++;
-        i++;
+		phil->i++;
     }
+	pthread_mutex_unlock(&data_pool->start_mutex);
 }
