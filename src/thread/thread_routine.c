@@ -1,7 +1,35 @@
 #include <philo.h>
 
-// Need to fix that all the threads use the same mutexes and not copies of the same mutexes like now
+
 void	*thread_routine(void *tmp)
+{
+    size_t *id;
+    t_philo *phil;
+
+
+	phil = (t_philo *) tmp;
+	id = &phil->id[phil->i - 1];
+
+	pthread_mutex_lock(&phil->data_pool->start_mutex);
+	pthread_mutex_unlock(&phil->data_pool->start_mutex);
+	printf("Philosopher %d starts: \n", *(int *) id);
+
+	pthread_mutex_lock(&phil->data_pool->mutex[2]);
+	phil->data_pool->test += 10;
+	printf("Philosopher %d, test: %zu\n\n", *(int *) id, phil->data_pool->test);
+    pthread_mutex_unlock(&phil->data_pool->mutex[2]);
+
+//    pthread_mutex_lock(&phil->mutex[1]);
+//    phil->test -= 2;
+//    printf("Philosopher %d, test: %zu\n\n", *(int *) id, phil->test);
+//    pthread_mutex_unlock(&phil->mutex[1]);
+	printf("Philosopher %d ends: \n", *(int *) id);
+
+    return (NULL);
+}
+
+// Need to fix that all the threads use the same mutexes and not copies of the same mutexes like now
+/*void	*thread_routine(void *tmp)
 {
     size_t	i;
     size_t	*id;
@@ -49,4 +77,4 @@ void	*thread_routine(void *tmp)
     free(phil);
 //	printf("Philosopher %d has died\n", *(int *) id);
     return ("Philosopher has died\n");
-}
+}*/
