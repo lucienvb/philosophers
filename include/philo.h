@@ -49,7 +49,7 @@ bool	mutex_destroy(pthread_mutex_t *mutex, size_t number_of_philosophers);
 void    thread_print_result(size_t number_of_philosopherss, char **thread_result);
 int 	thread_main(t_public *data_pool);
 bool	thread_join(size_t number_of_philosopherss, pthread_t *thread, char **thread_result);
-void	thread_create(t_public *data_pool, t_philo *phil, pthread_t *thread);
+void	thread_create(t_philo *philos, pthread_t *thread, long number_of_philosophers);
 void	*thread_routine(void *tmp);
 
 // UTILS
