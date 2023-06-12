@@ -33,16 +33,19 @@ static bool	initialize_thread_result(size_t number_of_philosophers, char ***thre
     return (true);
 }
 
-bool initialize(t_philo *phil, char ***thread_result, pthread_t **thread)
+bool initialize(t_public *data_pool, t_philo *phil, char ***thread_result, pthread_t **thread)
 {
-    if (initialize_thread(thread, phil->number_of_philosophers) == false)
+    if (initialize_thread(thread, data_pool->number_of_philosophers) == false)
+	{
         return (false);
-    phil->id = initialize_id(phil->number_of_philosophers);
+	}
+	phil->id = initialize_id(data_pool->number_of_philosophers);
     if (phil->id == NULL)
         return (free(*thread), false);
-    set_id(phil->number_of_philosophers, phil->id);
+    set_id(data_pool->number_of_philosophers, phil->id);
     phil->i = 0;
-    if (initialize_thread_result(phil->number_of_philosophers, thread_result) == false)
+	data_pool->test = 0;
+    if (initialize_thread_result(data_pool->number_of_philosophers, thread_result) == false)
 		return (free(*thread), free(phil->id), false);
     return (true);
 }
