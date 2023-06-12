@@ -41,24 +41,28 @@ static void	clean_up(pthread_t *thread, char **thread_result, pthread_mutex_t *m
 		free(mutex);
 }
 
-int thread_main(t_philo *phil)
+int thread_main(t_public *data_pool)
 {
     char			**thread_result;
     pthread_t 		*thread;
-	pthread_mutex_t	*mutex;
+	t_philo			phil;
 
     thread_result = NULL;
-	if (initialize(phil, &thread_result, &thread) == false)
+	if (initialize(data_pool, &phil, &thread_result, &thread) == false)
         return (0);
-	if (mutex_initialize(&mutex, phil->number_of_philosophers) == false)
+	if (mutex_initialize(&data_pool->mutex, data_pool->number_of_philosophers) == false)
 		return (clean_up(thread, thread_result, NULL), 0);
-	thread_create(phil, thread, &mutex);
-	if (thread_join(phil->number_of_philosophers, thread, thread_result) == false)
-		return (clean_up(thread, thread_result, mutex), 0);
-    thread_print_result(phil->number_of_philosophers, thread_result);
-	if (mutex_destroy(mutex, phil->number_of_philosophers) == false)
-		return (clean_up(thread, thread_result, mutex), 0);
-	clean_up(thread, thread_result, mutex);
-    free(phil->id);
+	if (pthread_mutex_init(&data_pool->start_mutex, NULL) != 0)
+		return (clean_up(thread, thread_result, data_pool->mutex), 0);
+	// have to free start_mutex later
+//	philos_create();
+	thread_create(data_pool, &phil, thread);
+	if (thread_join(data_pool->number_of_philosophers, thread, thread_result) == false)
+		return (clean_up(thread, thread_result, data_pool->mutex), 0);
+    thread_print_result(data_pool->number_of_philosophers, thread_result);
+	if (mutex_destroy(data_pool->mutex, data_pool->number_of_philosophers) == false)
+		return (clean_up(thread, thread_result, data_pool->mutex), 0);
+	clean_up(thread, thread_result, data_pool->mutex);
+    free(phil.id);
 	return (0);
 }
