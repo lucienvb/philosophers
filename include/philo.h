@@ -23,6 +23,7 @@ typedef struct s_public
 	long			time_to_die;
 	long			time_to_eat;
 	long			time_to_sleep;
+	int 			thread_counter;
 	size_t          test;
 	pthread_mutex_t *mutex;
 	pthread_mutex_t	start_mutex;
@@ -58,7 +59,7 @@ int 	thread_main(t_public *data_pool);
 bool	thread_join(size_t number_of_philosopherss, pthread_t *thread, char **thread_result);
 void	thread_create(t_philo *philos, pthread_t *thread, long number_of_philosophers);
 void	*thread_routine(void *tmp);
-int		thread_main_new();
+int		thread_main_new(t_public *data_pool);
 
 // UTILS
 bool	ft_atol_with_overflow(const char *str, long *result);

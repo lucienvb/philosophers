@@ -7,9 +7,11 @@ int main(int argc, char **argv)
     (void)argv;
 	if (parser(argc) == false)
 		return (0);
-    if (prepare_arguments(argv, &data_pool) == false) {
+    if (prepare_arguments(argv, &data_pool) == false)
+	{
+		printf("invalid input\n");
 		return (0);
 	}
-	thread_main_new();
+	thread_main_new(&data_pool);
 	return (0);
 }

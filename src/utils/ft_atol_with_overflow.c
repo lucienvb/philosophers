@@ -47,13 +47,11 @@ bool	ft_atol_with_overflow(const char *str, long *result)
 		i++;
 	if (str[i] == '-' || str[i] == '+')
 	{
-		if (str[i] == '-')
-			sign *= -1;
-		i++;
+		return (false);
 	}
 	if (!iterate_and_create(str, i, len, result))
 		return (false);
-//	*result += 1;
+	*result += 1;
 	*result *= sign;
 	return (true);
 }
