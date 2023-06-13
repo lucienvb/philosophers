@@ -43,16 +43,17 @@ endif
 
 # Source files
 SRC = \
-  thread/thread_main.c \
   utils/ft_atol_with_overflow.c \
   utils/ft_memcpy.c \
   utils/prepare_arguments.c \
   thread/thread_print_result.c \
   thread/thread_join.c \
   thread/thread_create.c \
-  thread/thread_routine.c \
-  initialize/initialize.c \
-  utils/parser.c
+  utils/parser.c \
+  thread/thread_new.c
+#  initialize/initialize.c \
+#  thread/thread_routine.c \
+#  thread/thread_main.c \
 
 TEST_SRC = \
   src/utils/parser.c

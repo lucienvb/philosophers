@@ -26,9 +26,16 @@ typedef struct s_public
 	size_t          test;
 	pthread_mutex_t *mutex;
 	pthread_mutex_t	start_mutex;
+	// long i is temporary
+	long 			i;
 }					t_public;
 
 // PHILO STRUCT (PRIVATE)
+//typedef struct s_philo
+//{
+//	pthread_mutex_t		*start_mutex;
+//	long				i;
+//} 						t_philo;
 typedef struct s_philo
 {
 	size_t			*id;
@@ -51,6 +58,7 @@ int 	thread_main(t_public *data_pool);
 bool	thread_join(size_t number_of_philosopherss, pthread_t *thread, char **thread_result);
 void	thread_create(t_philo *philos, pthread_t *thread, long number_of_philosophers);
 void	*thread_routine(void *tmp);
+int		thread_main_new();
 
 // UTILS
 bool	ft_atol_with_overflow(const char *str, long *result);
