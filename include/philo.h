@@ -27,20 +27,13 @@ typedef struct s_public
 	size_t          test;
 	pthread_mutex_t *mutex;
 	pthread_mutex_t	start_mutex;
-	// long i is temporary
 	long 			i;
 }					t_public;
 
 // PHILO STRUCT (PRIVATE)
-//typedef struct s_philo
-//{
-//	pthread_mutex_t		*start_mutex;
-//	long				i;
-//} 						t_philo;
 typedef struct s_philo
 {
-	size_t			*id;
-	size_t  		i;
+	size_t  		id;
 	t_public		*data_pool;
 }					t_philo;
 
