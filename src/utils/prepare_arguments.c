@@ -6,7 +6,6 @@ bool prepare_arguments(char **argv, t_public *data_pool)
 
 	valid_number = true;
 	valid_number = ft_atol_with_overflow(argv[1], &data_pool->number_of_philosophers);
-//	data_pool->number_of_philosophers++;
 	if (valid_number == false)
 		return (false);
 	valid_number = ft_atol_with_overflow(argv[2], &data_pool->time_to_die);

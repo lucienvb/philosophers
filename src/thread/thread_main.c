@@ -1,5 +1,6 @@
 #include <philo.h>
 
+// check the protections of this function
 bool	mutex_initialize(pthread_mutex_t **mutex, size_t number_of_philosophers)
 {
 	size_t i;
@@ -11,7 +12,7 @@ bool	mutex_initialize(pthread_mutex_t **mutex, size_t number_of_philosophers)
 	while (i < number_of_philosophers)
 	{
 		if (pthread_mutex_init(&(*mutex)[i], NULL) != 0)
-			return (false);
+			return (free(*mutex), false);
 		i++;
 	}
 	return (true);
