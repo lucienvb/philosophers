@@ -16,8 +16,8 @@ static void	print(pthread_mutex_t *print, long id, char *message)
 
 static void	*thread_function(void* arg)
 {
-	t_philo	        *phil;
 	pthread_mutex_t	*stop;
+	t_philo	        *phil;
 
 	phil = (t_philo *)arg;
 	print(&phil->data_pool->mutex[PRINT], (long) phil->id, "starts");
@@ -40,20 +40,18 @@ static void	*thread_function(void* arg)
 			pthread_mutex_unlock(stop);
 			break ;
 		}
-		print(&phil->data_pool->mutex[1], (long)phil->id, "still inside while loop");
+		print(&phil->data_pool->mutex[PRINT], (long)phil->id, "still inside while loop");
 		pthread_mutex_unlock(stop);
 	}
-	print(&phil->data_pool->mutex[1], (long)phil->id, "stops");
-//	free(phil);
+	print(&phil->data_pool->mutex[PRINT], (long)phil->id, "stops");
 	return (NULL);
 }
 
 int thread_main_new(t_public *data_pool)
 {
 	pthread_t		*threads;
-	pthread_mutex_t	*start_mutex;
-	size_t 			i;
 	t_philo			*philos;
+	size_t 			i;
 
 	philos = malloc(data_pool->number_of_philosophers * sizeof(t_philo));
 	if (!philos)
@@ -61,22 +59,22 @@ int thread_main_new(t_public *data_pool)
 	if (mutex_initialize(&data_pool->mutex, 3) == false)
 		  return (free(philos), 0);
 	data_pool->dead = false;
-	start_mutex = &data_pool->mutex[0];
 	threads = malloc(data_pool->number_of_philosophers * sizeof(pthread_t));
 	if (!threads)
 		return (free(philos), pthread_mutex_destroy(data_pool->mutex), free(data_pool->mutex), 0);
 
-	pthread_mutex_lock(start_mutex);
+	pthread_mutex_lock(&data_pool->mutex[START]);
 	i = 0;
 	while (i < (size_t) data_pool->number_of_philosophers)
 	{
 		philos[i].id = i;
 		philos[i].data_pool = data_pool;
-		pthread_create(&threads[i], NULL, thread_function, (void *)&philos[i]); // dit kan fout gaan moet afgevangen worden
+		pthread_create(&threads[i], NULL, thread_function, (void *)&philos[i]);
+// have to protect pthread_create
 		i++;
 	}
-	printf("unlocking start mutex\n");
-	pthread_mutex_unlock(start_mutex);
+	printf("unlocking start mutex\n---------------------\n");
+	pthread_mutex_unlock(&data_pool->mutex[START]);
 
 	i = 0;
 
