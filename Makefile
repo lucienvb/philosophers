@@ -50,10 +50,10 @@ SRC = \
   thread/thread_join.c \
   thread/thread_create.c \
   utils/parser.c \
+  thread/thread_main.c \
   thread/thread_new.c
 #  initialize/initialize.c \
 #  thread/thread_routine.c \
-#  thread/thread_main.c \
 
 TEST_SRC = \
   src/utils/parser.c
