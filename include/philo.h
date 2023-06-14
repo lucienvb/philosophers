@@ -16,6 +16,14 @@
 # define THOUSAND 1000
 # define ZERO 0
 
+// ENUM
+typedef enum e_mutexindex
+{
+	START,
+	PRINT,
+	STOP,
+}	t_mutexindex;
+
 // PUBLIC STRUCT
 typedef struct s_public
 {
@@ -24,9 +32,8 @@ typedef struct s_public
 	long			time_to_eat;
 	long			time_to_sleep;
 	int 			thread_counter;
-	size_t          test;
+	bool			dead;
 	pthread_mutex_t *mutex;
-	pthread_mutex_t	start_mutex;
 	long 			i;
 }					t_public;
 
@@ -44,6 +51,7 @@ bool	philo(char *str);
 bool    initialize(t_public *data_pool, t_philo *phil, char ***thread_result, pthread_t **thread);
 
 // MUTEX
+bool	mutex_initialize(pthread_mutex_t **mutex, size_t number_of_philosophers);
 bool	mutex_destroy(pthread_mutex_t *mutex, size_t number_of_philosophers);
 
 // THREAD
