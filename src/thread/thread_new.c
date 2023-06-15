@@ -6,9 +6,10 @@
 #include <pthread.h>
 #include <philo.h>
 
-static void	print(pthread_mutex_t *print, long id, char *message)
+static void	print(pthread_mutex_t *print, long id, char *message, int64_t start)
 {
 	pthread_mutex_lock(print);
+	printf("%lld ", time_difference_ms(time_of_day_ms(), start) * 1000);
 	printf("%ld", id);
 	printf(" %s\n", message);
 	pthread_mutex_unlock(print);
@@ -18,15 +19,16 @@ static void	*thread_function(void* arg)
 {
 	pthread_mutex_t	*stop;
 	t_philo	        *phil;
+	const int64_t	start = time_of_day_ms();
 
 	phil = (t_philo *)arg;
-	print(&phil->data_pool->mutex[PRINT], (long) phil->id, "starts");
+	print(&phil->data_pool->mutex[PRINT], (long) phil->id, "starts", start);
 	pthread_mutex_lock(&phil->data_pool->mutex[START]);
 	pthread_mutex_unlock(&phil->data_pool->mutex[START]);
 	stop = &phil->data_pool->mutex[STOP];
 	while (1)
 	{
-		usleep(1);
+		time_sleep_ms(1);
 		pthread_mutex_lock(stop);
 		if (phil->data_pool->dead == true)
 		{
@@ -40,10 +42,10 @@ static void	*thread_function(void* arg)
 			pthread_mutex_unlock(stop);
 			break ;
 		}
-		print(&phil->data_pool->mutex[PRINT], (long)phil->id, "still inside while loop");
+		print(&phil->data_pool->mutex[PRINT], (long)phil->id, "still inside while loop", start);
 		pthread_mutex_unlock(stop);
 	}
-	print(&phil->data_pool->mutex[PRINT], (long)phil->id, "stops");
+	print(&phil->data_pool->mutex[PRINT], (long)phil->id, "stops", start);
 	return (NULL);
 }
 

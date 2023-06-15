@@ -9,8 +9,12 @@
 # include <pthread.h>
 # include <stdlib.h>
 # include <assert.h>
-#include <limits.h>
-#include <stddef.h>
+# include <limits.h>
+# include <stddef.h>
+# include <time.h>
+# include <sys/time.h>
+
+
 
 // DEFINE
 # define THOUSAND 1000
@@ -61,6 +65,11 @@ bool	thread_join(size_t number_of_philosopherss, pthread_t *thread, char **threa
 void	thread_create(t_philo *philos, pthread_t *thread, long number_of_philosophers);
 void	*thread_routine(void *tmp);
 int		thread_main_new(t_public *data_pool);
+
+// TIME
+int64_t	time_difference_ms(int64_t end, int64_t start);
+int64_t	time_of_day_ms(void);
+void	time_sleep_ms(int64_t time_to_sleep);
 
 // UTILS
 bool	ft_atol_with_overflow(const char *str, long *result);

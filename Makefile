@@ -51,7 +51,8 @@ SRC = \
   thread/thread_create.c \
   utils/parser.c \
   thread/thread_main.c \
-  thread/thread_new.c
+  thread/thread_new.c \
+  utils/ft_usleep.c
 #  initialize/initialize.c \
 #  thread/thread_routine.c \
 
