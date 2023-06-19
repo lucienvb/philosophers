@@ -1,3 +1,9 @@
-//
-// Created by Lucien Van Bussel on 6/19/23.
-//
+#include <philo.h>
+
+void	initialize_time(t_time *time, t_philo *phil)
+{
+	time->start = time_of_day_ms();
+	ft_memcpy(&time->time_to_die, &phil->data_pool->time_to_die, sizeof(long));
+	ft_memcpy(&time->time_to_eat, &phil->data_pool->time_to_eat, sizeof(long));
+	ft_memcpy(&time->time_to_sleep, &phil->data_pool->time_to_sleep, sizeof(long));
+}
