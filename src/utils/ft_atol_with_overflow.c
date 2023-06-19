@@ -10,15 +10,11 @@ static size_t ft_strlen(const char *str)
 	return (i);
 }
 
-static bool	iterate_and_create(const char *str, size_t i,
-								  size_t len, long *result)
+static bool	iterate_and_create(const char *str, size_t i, long *result)
 {
 	while (str[i] >= '0' && str[i] <= '9')
 	{
-		if (i == len - 1 && str[i] != '0')
-			*result = (*result * 10) - 1 + (str[i] - '0');
-		else
-			*result = *result * 10 + str[i] - '0';
+		*result = *result * 10 + str[i] - '0';
 		if (*result < 0 && *result != INT_MIN)
 			return (false);
 		i++;
@@ -49,9 +45,8 @@ bool	ft_atol_with_overflow(const char *str, long *result)
 	{
 		return (false);
 	}
-	if (!iterate_and_create(str, i, len, result))
+	if (!iterate_and_create(str, i, result))
 		return (false);
-//	*result += 1;
 	*result *= sign;
 	return (true);
 }
