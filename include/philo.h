@@ -29,6 +29,14 @@ typedef enum e_mutexindex
 	STOP,
 }	t_mutexindex;
 
+// TIME
+typedef struct s_time
+{
+    int64_t start;
+    int64_t time_since_last_meal;
+    long 	time_to_die;
+}           t_time;
+
 // PUBLIC STRUCT
 typedef struct s_public
 {
@@ -37,7 +45,7 @@ typedef struct s_public
 	long			time_to_eat;
 	long			time_to_sleep;
 	int 			thread_counter;
-	bool			dead;
+	bool			stop;
 	pthread_mutex_t *mutex;
 	long 			i;
 }					t_public;
@@ -49,6 +57,7 @@ typedef struct s_philo
 	t_public		*data_pool;
 	pthread_mutex_t *left;
 	pthread_mutex_t *right;
+    bool            dead;
 }					t_philo;
 
 // FUNCTIONS
@@ -73,11 +82,13 @@ int		thread_main_new(t_public *data_pool);
 int64_t	time_difference_ms(int64_t end, int64_t start);
 int64_t	time_of_day_ms(void);
 void	time_sleep_ms(int64_t time_to_sleep);
+bool	time_sleep_and_validate(int64_t time_to_sleep, t_philo *phil);
 
 // UTILS
 bool	ft_atol_with_overflow(const char *str, long *result);
 void	*ft_memcpy(void *dst, void *src, size_t n);
 bool 	prepare_arguments(char **argv, t_public *data_pool);
 bool	parser(int argc);
+bool	stop_now(t_philo *phil);
 
 #endif
