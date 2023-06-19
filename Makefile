@@ -52,9 +52,16 @@ SRC = \
   utils/parser.c \
   thread/thread_main.c \
   thread/thread_new.c \
-  utils/ft_usleep.c
+  utils/ft_usleep.c \
+  thread/thread_routine.c \
+  actions/diner.c \
+  actions/sleeping.c \
+  initialize/initialize_time.c \
+  utils/lock_print_unlock.c \
+  utils/check_if_alive.c \
+  initialize/initialize_philos.c \
+  utils/stop_now.c
 #  initialize/initialize.c \
-#  thread/thread_routine.c \
 
 TEST_SRC = \
   src/utils/parser.c

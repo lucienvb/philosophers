@@ -14,8 +14,6 @@
 # include <time.h>
 # include <sys/time.h>
 
-
-
 // DEFINE
 # define THOUSAND 1000
 # define ZERO 0
@@ -68,11 +66,17 @@ typedef struct s_philo
     bool            dead;
 }					t_philo;
 
+// ACTIONS
+bool diner(t_philo *phil, t_time *time);
+bool sleeping(t_philo *phil, t_time *time);
+
 // FUNCTIONS
 bool	philo(char *str);
 
 // INITIALIZE
 bool    initialize(t_public *data_pool, t_philo *phil, char ***thread_result, pthread_t **thread);
+void	initialize_time(t_time *time, t_philo *phil);
+void	initialize_philos(t_philo *philos, size_t i, t_public *data_pool, long number_of_philosophers);
 
 // MUTEX
 bool	mutex_initialize(pthread_mutex_t **mutex, size_t number_of_philosophers);
@@ -84,7 +88,7 @@ int 	thread_main(t_public *data_pool);
 bool	thread_join(size_t number_of_philosopherss, pthread_t *thread, char **thread_result);
 void	thread_create(t_philo *philos, pthread_t *thread, long number_of_philosophers);
 void	*thread_routine(void *tmp);
-int		thread_main_new(t_public *data_pool);
+int		thread_main_new(t_public *data_pool, long number_of_philosophers);
 
 // TIME
 int64_t	time_difference_ms(int64_t end, int64_t start);
@@ -98,5 +102,7 @@ void	*ft_memcpy(void *dst, void *src, size_t n);
 bool 	prepare_arguments(int argc, char **argv, t_public *data_pool);
 bool	parser(int argc);
 bool	stop_now(t_philo *phil);
+void	print(pthread_mutex_t *print, long id, char *message, int64_t start);
+bool	check_if_alive(t_philo *phil, int64_t time_since_last_meal, long time_to_die);
 
 #endif
