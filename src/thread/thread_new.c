@@ -63,9 +63,15 @@ static bool diner(t_philo *phil, t_time *time)
             pthread_mutex_unlock(phil->right);
             return (false);
         }
-        printf("%ld %ld has taken a fork\n", (long) time_difference_ms(time_of_day_ms(), time->start), (long) phil->id);
+		if (pthread_mutex_lock(&phil->data_pool->mutex[MEAL]) == 0)
+		{
+			phil->meal_count++;
+			if (phil->meal_count == phil->number_of_times_each_philosopher_must_eat)
+				phil->data_pool->reached_meal_count++;
+			pthread_mutex_unlock(&phil->data_pool->mutex[MEAL]);
+		}
+		printf("%ld %ld has taken a fork\n", (long) time_difference_ms(time_of_day_ms(), time->start), (long) phil->id);
         printf("%ld %ld is eating\n", (long) time_difference_ms(time_of_day_ms(), time->start), (long) phil->id);
-//        time_sleep_ms(phil->data_pool->time_to_eat);
         if (time_sleep_and_validate(phil->data_pool->time_to_eat, phil) == false)
             return (false);
         pthread_mutex_unlock(phil->left);
