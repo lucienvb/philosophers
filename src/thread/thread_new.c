@@ -80,32 +80,52 @@ static bool diner(t_philo *phil, t_time *time)
     return (true);
 }
 
+static void initialize_time(t_time *time, t_philo *phil)
+{
+    time->start = time_of_day_ms();
+    ft_memcpy(&time->time_to_die, &phil->data_pool->time_to_die, sizeof(long));
+    ft_memcpy(&time->time_to_eat, &phil->data_pool->time_to_eat, sizeof(long));
+    ft_memcpy(&time->time_to_sleep, &phil->data_pool->time_to_sleep, sizeof(long));
+}
+
+static bool sleeping(t_philo *phil, t_time *time)
+{
+    printf("%ld %ld is sleeping\n", (long) time_difference_ms(time_of_day_ms(), time->start), (long) phil->id);
+    if (time_sleep_and_validate(phil->data_pool->time_to_sleep, phil) == false)
+        return (false);
+    return (true);
+}
+
 static void	*thread_function(void* arg)
 {
 	pthread_mutex_t	*stop;
 	t_philo	        *phil;
     t_time          time;
+    bool            first_meal;
 
-    time.start = time_of_day_ms();
-	phil = (t_philo *)arg;
-	ft_memcpy(&time.time_to_die, &phil->data_pool->time_to_die, sizeof(long));
+   	phil = (t_philo *)arg;
+    initialize_time(&time, phil);
 	print(&phil->data_pool->mutex[PRINT], (long) phil->id, "starts", time.start);
 	pthread_mutex_lock(&phil->data_pool->mutex[START]);
 	pthread_mutex_unlock(&phil->data_pool->mutex[START]);
 	stop = &phil->data_pool->mutex[STOP];
-
+    first_meal = true;
 	while (1)
 	{
-		time.time_since_last_meal = time_of_day_ms();
+        if (first_meal == true)
+        {
+            time.time_since_last_meal = time_of_day_ms();
+            first_meal = false;
+        }
 		if (diner(phil, &time) == false)
             break ;
-
-        time_sleep_ms(1);
+        time.time_since_last_meal = time_of_day_ms();
+        if (sleeping(phil, &time) == false)
+            break ;
+        print(&phil->data_pool->mutex[PRINT], (long)phil->id, "is thinking", time.start);
 	}
     if (phil->dead == true)
-        print(&phil->data_pool->mutex[PRINT], (long)phil->id, "is dead", time.start);
-    else
-        print(&phil->data_pool->mutex[PRINT], (long)phil->id, "is still alive", time.start);
+        print(&phil->data_pool->mutex[PRINT], (long)phil->id, "died", time.start);
 	return (NULL);
 }
 
