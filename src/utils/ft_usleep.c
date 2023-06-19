@@ -36,7 +36,8 @@ bool	time_sleep_and_validate(int64_t time_to_sleep, t_philo *phil)
             break ;
         if (stop_now(phil) == true)
             return (false);
-        usleep(500);
+		time_sleep_ms(10);
+//      usleep(500);
     }
     return (true);
 }
