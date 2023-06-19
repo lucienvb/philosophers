@@ -154,6 +154,9 @@ int thread_main_new(t_public *data_pool)
 		philos[i].id = i;
         philos[i].dead = false;
         philos[i].left = &data_pool->mutex[STOP + i + 1];
+		philos[i].meal_count = 0;
+		ft_memcpy(&philos[i].number_of_times_each_philosopher_must_eat,
+				&data_pool->number_of_times_each_philosopher_must_eat, sizeof(long));
         if ((STOP + i) == STOP) {
             philos[i].right = &data_pool->mutex[STOP + pool_copy.number_of_philosophers];
         }
