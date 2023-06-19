@@ -3,6 +3,7 @@
 int main(int argc, char **argv)
 {
 	t_public	data_pool;
+	long 		number_of_philosophers;
 
     (void)argv;
 	if (parser(argc) == false)
@@ -18,6 +19,7 @@ int main(int argc, char **argv)
 		printf("%ld 1 died\n", (long) data_pool.time_to_die);
 		return (0);
 	}
-	thread_main_new(&data_pool);
+	ft_memcpy(&number_of_philosophers, &data_pool.number_of_philosophers, sizeof(long));
+	thread_main_new(&data_pool, number_of_philosophers);
 	return (0);
 }
