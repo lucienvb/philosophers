@@ -47,8 +47,8 @@ typedef struct s_philo
 {
 	size_t  		id;
 	t_public		*data_pool;
-	pthread_mutex_t left;
-	pthread_mutex_t right;
+	pthread_mutex_t *left;
+	pthread_mutex_t *right;
 }					t_philo;
 
 // FUNCTIONS
