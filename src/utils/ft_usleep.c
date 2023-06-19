@@ -24,3 +24,19 @@ void	time_sleep_ms(int64_t time_to_sleep)
 		usleep(500);
 	}
 }
+
+bool	time_sleep_and_validate(int64_t time_to_sleep, t_philo *phil)
+{
+    const int64_t	start = time_of_day_ms();
+
+//    (void)phil;
+    while (1)
+    {
+        if (time_difference_ms(time_of_day_ms(), start) >= time_to_sleep)
+            break ;
+        if (stop_now(phil) == true)
+            return (false);
+        usleep(500);
+    }
+    return (true);
+}
