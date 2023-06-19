@@ -25,10 +25,10 @@ bool prepare_arguments(int argc, char **argv, t_public *data_pool)
 	}
 	data_pool->thread_counter = 0;
 	data_pool->reached_meal_count = 0;
-	printf("\nnumber of philosophers: %zu\n", data_pool->number_of_philosophers);
-	printf("time to die: %zu\n", data_pool->time_to_die);
-	printf("time to eat: %zu\n", data_pool->time_to_eat);
-	printf("time to sleep: %zu\n\n", data_pool->time_to_sleep);
-	printf("number of times each philosopher must eat: %zu\n\n", data_pool->number_of_times_each_philosopher_must_eat);
+//	printf("\nnumber of philosophers: %zu\n", data_pool->number_of_philosophers);
+//	printf("time to die: %zu\n", data_pool->time_to_die);
+//	printf("time to eat: %zu\n", data_pool->time_to_eat);
+//	printf("time to sleep: %zu\n", data_pool->time_to_sleep);
+//	printf("number of times each philosopher must eat: %zu\n\n", data_pool->number_of_times_each_philosopher_must_eat);
 	return (valid_number);
 }
