@@ -26,7 +26,6 @@ int thread_main_new(t_public *data_pool, long number_of_philosophers)
 // have to protect pthread_create
 		i++;
 	}
-//	printf("unlocking start mutex\n---------------------\n");
 	pthread_mutex_unlock(&data_pool->mutex[START]);
 	i = 0;
 	while (i < (size_t) number_of_philosophers)

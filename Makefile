@@ -39,6 +39,10 @@ ifdef	FSAN
 	CFLAGS		+=-fsanitize=address,undefined
 endif
 
+ifdef	THRD
+	CFLAGS		+=-fsanitize=thread
+endif
+
 ################################################################################
 
 # Source files

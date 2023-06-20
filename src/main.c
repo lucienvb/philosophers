@@ -5,10 +5,7 @@ int main(int argc, char **argv)
 	t_public	data_pool;
 	long 		number_of_philosophers;
 
-    (void)argv;
-	if (parser(argc) == false)
-		return (0);
-    if (prepare_arguments(argc, argv, &data_pool) == false)
+	if (parser(argc) == false || prepare_arguments(argc, argv, &data_pool) == false)
 	{
 		printf("invalid input\n");
 		return (0);

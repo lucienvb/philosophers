@@ -102,7 +102,8 @@ void	*ft_memcpy(void *dst, void *src, size_t n);
 bool 	prepare_arguments(int argc, char **argv, t_public *data_pool);
 bool	parser(int argc);
 bool	stop_now(t_philo *phil);
-void	print(pthread_mutex_t *print, long id, char *message, int64_t start);
-bool	check_if_alive(t_philo *phil, int64_t time_since_last_meal, long time_to_die);
+void	print(pthread_mutex_t *print, t_philo *phil, char *message, int64_t start);
+bool	check_if_alive(t_philo *phil, t_time *time);
+//bool	check_if_alive(t_philo *phil, int64_t time_since_last_meal, long time_to_die);
 
 #endif
