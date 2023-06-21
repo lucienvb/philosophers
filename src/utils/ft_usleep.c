@@ -30,13 +30,12 @@ bool	time_sleep_and_validate(int64_t time_to_sleep, t_philo *phil)
     const int64_t	start = time_of_day_ms();
 
     while (1)
-    {
-        if (time_difference_ms(time_of_day_ms(), start) >= time_to_sleep)
-            break ;
-        if (stop_now(phil) == true)
-            return (false);
+	{
+		if (time_difference_ms(time_of_day_ms(), start) >= time_to_sleep)
+			break;
+		if (stop_now(phil) == true)
+			return (false);
         usleep(500);
-//		time_sleep_ms(1);
-    }
+	}
     return (true);
 }

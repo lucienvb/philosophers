@@ -41,22 +41,3 @@ bool	mutex_destroy(pthread_mutex_t *mutex, size_t number_of_philosophers)
 //	if (mutex)
 //		free(mutex);
 //}
-//
-//static t_philo	*philos_create(t_philo *phil, t_public *data_pool)
-//{
-//	size_t	i;
-//	t_philo	*philos;
-//
-//	philos = malloc(data_pool->number_of_philosophers * sizeof(t_philo));
-//	if (!philos)
-//		return (NULL);
-//	i = 0;
-//	while (i < (size_t) data_pool->number_of_philosophers)
-//	{
-//        ft_memcpy(&philos[i], phil, sizeof(t_philo *));
-//		philos[i].data_pool = data_pool;
-//		philos[i].i = i;
-//		i++;
-//	}
-//	return (philos);
-//}
