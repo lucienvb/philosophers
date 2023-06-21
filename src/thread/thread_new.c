@@ -25,7 +25,10 @@ int thread_main_new(t_public *data_pool, long number_of_philosophers)
 					pthread_mutex_destroy(data_pool->mutex), free(data_pool->mutex), 0);
 // have to protect pthread_create
 		i++;
-	}
+    }
+	pthread_mutex_lock(&data_pool->mutex[TIME]);
+	data_pool->start = time_of_day_ms();
+	pthread_mutex_unlock(&data_pool->mutex[TIME]);
 	pthread_mutex_unlock(&data_pool->mutex[START]);
 	i = 0;
 	while (i < (size_t) number_of_philosophers)

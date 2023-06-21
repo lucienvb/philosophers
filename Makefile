@@ -61,7 +61,7 @@ SRC = \
   actions/diner.c \
   actions/sleeping.c \
   initialize/initialize_time.c \
-  utils/lock_print_unlock.c \
+  utils/print.c \
   utils/check_if_alive.c \
   initialize/initialize_philos.c \
   utils/stop_now.c

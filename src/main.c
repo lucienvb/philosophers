@@ -17,6 +17,5 @@ int main(int argc, char **argv)
 		return (0);
 	}
 	ft_memcpy(&number_of_philosophers, &data_pool.number_of_philosophers, sizeof(long));
-	thread_main_new(&data_pool, number_of_philosophers);
-	return (0);
+	return (thread_main_new(&data_pool, number_of_philosophers));
 }
