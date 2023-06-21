@@ -15,7 +15,6 @@
 # include <sys/time.h>
 
 // DEFINE
-# define THOUSAND 1000
 # define ZERO 0
 
 // ENUM
@@ -25,7 +24,7 @@ typedef enum e_mutexindex
 	PRINT,
 	TIME,
 	MEAL,
-	MEALS,
+	DEAD,
 	SLEEP,
 	STOP,
 }	t_mutexindex;
@@ -76,9 +75,9 @@ bool sleeping(t_philo *phil, t_time *time);
 bool	philo(char *str);
 
 // INITIALIZE
-bool    initialize(t_public *data_pool, t_philo *phil, char ***thread_result, pthread_t **thread);
 void	initialize_time(t_time *time, t_philo *phil);
 void	initialize_philos(t_philo *philos, size_t i, t_public *data_pool, long number_of_philosophers);
+bool	initialize_threads(pthread_t **thread, size_t number_of_philosophers);
 
 // MUTEX
 bool	mutex_initialize(pthread_mutex_t **mutex, size_t number_of_philosophers);
@@ -106,5 +105,6 @@ bool	parser(int argc);
 bool	stop_now(t_philo *phil);
 bool	print(pthread_mutex_t *print, t_philo *phil, char *message, int64_t start);
 bool	check_if_alive(t_philo *phil, t_time *time);
+void	meal_status(t_philo *phil, bool add);
 
 #endif
