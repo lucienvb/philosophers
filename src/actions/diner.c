@@ -24,7 +24,7 @@ static bool dine(t_philo *phil, t_time *time, pthread_mutex_t *first, pthread_mu
 			return (false);
 		}
         time->time_since_last_meal = time_of_day_ms();
-		meal_status(phil, 1);
+		meal_status(phil, 1, 0);
 		pthread_mutex_unlock(second);
         pthread_mutex_unlock(first);
     }

@@ -25,6 +25,8 @@ void	time_sleep_ms(int64_t time_to_sleep)
 	}
 }
 
+// this function can be used to sleep an amount of milliseconds
+// every 500 microseconds it checks
 bool	time_sleep_and_validate(int64_t time_to_sleep, t_philo *phil)
 {
     const int64_t	start = time_of_day_ms();

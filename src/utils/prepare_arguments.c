@@ -48,7 +48,8 @@ bool prepare_arguments(int argc, char **argv, t_public *data_pool)
 		return (false);
 	valid_number = true;
 	valid_number = ft_atol_with_overflow(argv[1], &data_pool->number_of_philosophers);
-	if (valid_number == false || data_pool->number_of_philosophers == 0)
+	if (valid_number == false || data_pool->number_of_philosophers == 0
+			|| data_pool->number_of_philosophers > 2047)
 		return (false);
 	valid_number = ft_atol_with_overflow(argv[2], &data_pool->time_to_die);
 	if (valid_number == false)

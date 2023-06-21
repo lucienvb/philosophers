@@ -1,5 +1,6 @@
 #include <philo.h>
 
+
 bool sleeping(t_philo *phil, t_time *time)
 {
 //	usleep(500);

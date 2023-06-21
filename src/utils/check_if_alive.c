@@ -16,11 +16,11 @@ bool	check_if_alive(t_philo *phil, t_time *time)
 			return (false);
 		}
 		print(&phil->data_pool->mutex[PRINT], phil, "died", time->start);
-		phil->data_pool->stop = true;
+		meal_status(phil, 0, 1);
 		pthread_mutex_unlock(&phil->data_pool->mutex[TIME]);
 		return (false);
 	}
-	meal_status(phil, 0);
+	meal_status(phil, 0, 0);
 	pthread_mutex_unlock(&phil->data_pool->mutex[TIME]);
 	return (true);
 }

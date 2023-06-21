@@ -9,7 +9,7 @@ void	*thread_routine(void* arg)
 	pthread_mutex_lock(&phil->data_pool->mutex[START]);
 	time.start = phil->data_pool->start;
 	pthread_mutex_unlock(&phil->data_pool->mutex[START]);
-	initialize_time(&time, phil); // perhaps after actual start of philos [2 lines down?]
+	initialize_time(&time, phil);
 	//printf("philo [%zu]\t%lld\n", phil->id, time_difference_ms(time_of_day_ms(), time.start));
 	time.time_since_last_meal = time_of_day_ms();
 	while (1)

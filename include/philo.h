@@ -23,8 +23,6 @@ typedef enum e_mutexindex
 	START,
 	PRINT,
 	TIME,
-	MEAL,
-	DEAD,
 	SLEEP,
 	STOP,
 }	t_mutexindex;
@@ -105,6 +103,6 @@ bool	parser(int argc);
 bool	stop_now(t_philo *phil);
 bool	print(pthread_mutex_t *print, t_philo *phil, char *message, int64_t start);
 bool	check_if_alive(t_philo *phil, t_time *time);
-void	meal_status(t_philo *phil, bool add);
+void	meal_status(t_philo *phil, bool add, bool set);
 
 #endif
