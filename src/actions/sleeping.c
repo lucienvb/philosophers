@@ -1,6 +1,9 @@
 #include <philo.h>
 
-
+// this function let a thread sleep for a period of time_to_sleep
+// before it does two checks:
+// 1) if the thread is alive
+// 2) if the thread needs to stop (because another thread has died)
 bool sleeping(t_philo *phil, t_time *time)
 {
 //	usleep(500);
@@ -15,7 +18,7 @@ bool sleeping(t_philo *phil, t_time *time)
 //		pthread_mutex_unlock(&phil->data_pool->mutex[SLEEP]);
 		return (false);
 	}
-	if (time_sleep_and_validate(phil->data_pool->time_to_sleep, phil) == false)
+	if (time_sleep_and_validate(time->time_to_sleep, phil) == false)
 	{
 //		pthread_mutex_unlock(&phil->data_pool->mutex[SLEEP]);
 		return (false);

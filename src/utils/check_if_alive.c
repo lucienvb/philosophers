@@ -1,5 +1,6 @@
 #include <philo.h>
 
+// TIME MUTEX
 // this function checks if the time till the next meal of a thread has passed
 // (what means that he dies)
 // if so, it checks if another thread hasn't died first

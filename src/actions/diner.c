@@ -17,7 +17,7 @@ static bool dine(t_philo *phil, t_time *time, pthread_mutex_t *first, pthread_mu
         }
         print(&phil->data_pool->mutex[PRINT], phil, "has taken a fork", time->start);
 		print(&phil->data_pool->mutex[PRINT], phil, "is eating", time->start);
-		if (time_sleep_and_validate(phil->data_pool->time_to_eat, phil) == false)
+		if (time_sleep_and_validate(time->time_to_eat, phil) == false)
 		{
 			pthread_mutex_unlock(second);
 			pthread_mutex_unlock(first);
@@ -31,6 +31,7 @@ static bool dine(t_philo *phil, t_time *time, pthread_mutex_t *first, pthread_mu
     return (true);
 }
 
+// LEFT MUTEX & RIGHT MUTEX
 // this function realizes that:
 // - every thread with an even id number tries to pick first there left fork, then their right one
 // - every thread odd id number tries to pick first there right fork, then their left one

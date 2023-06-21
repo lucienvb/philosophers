@@ -78,7 +78,7 @@ void	initialize_philos(t_philo *philos, size_t i, t_public *data_pool, long numb
 bool	initialize_threads(pthread_t **thread, size_t number_of_philosophers);
 
 // MUTEX
-bool	mutex_initialize(pthread_mutex_t **mutex, size_t number_of_philosophers);
+bool	initialize_mutex(pthread_mutex_t **mutex, size_t number_of_philosophers);
 bool	mutex_destroy(pthread_mutex_t *mutex, size_t number_of_philosophers);
 
 // THREAD

@@ -51,7 +51,7 @@ SRC = \
   utils/ft_memcpy.c \
   utils/prepare_arguments.c \
   utils/parser.c \
-  thread/thread_main.c \
+  initialize/initialize_mutex.c \
   thread/thread_new.c \
   utils/ft_usleep.c \
   thread/thread_routine.c \
@@ -63,7 +63,8 @@ SRC = \
   initialize/initialize_philos.c \
   utils/stop_now.c \
   initialize/initialize_threads.c \
-  utils/meal_status.c
+  utils/meal_status.c \
+  utils/mutex_destroy.c
 
 TEST_SRC = \
   src/utils/parser.c

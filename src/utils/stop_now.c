@@ -1,5 +1,6 @@
 #include <philo.h>
 
+// STOP MUTEX
 // this function checks whether the shared stop boolean is set to
 // true or not
 // if so, it returns true

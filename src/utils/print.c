@@ -1,6 +1,9 @@
 #include <philo.h>
 
-// try to get rid of the time_sleep_ms(1)
+// PRINT MUTEX
+// this function prints a given message
+// first it checks if another philosopher has died
+// if so, it returns false
 bool	print(pthread_mutex_t *print, t_philo *phil, char *message, int64_t start)
 {
 	pthread_mutex_lock(print);
@@ -15,6 +18,3 @@ bool	print(pthread_mutex_t *print, t_philo *phil, char *message, int64_t start)
 	pthread_mutex_unlock(print);
     return (true);
 }
-
-// need to print at time = 0 [ALL PHILOS]
-

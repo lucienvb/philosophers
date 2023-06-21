@@ -9,7 +9,7 @@ int thread_main_new(t_public *data_pool, long number_of_philosophers)
 	philos = malloc(number_of_philosophers * sizeof(t_philo));
 	if (!philos)
 		return (0);
-	if (mutex_initialize(&data_pool->mutex, STOP + number_of_philosophers + 1) == false)
+	if (initialize_mutex(&data_pool->mutex, STOP + number_of_philosophers + 1) == false)
 		return (free(philos), 0);
     data_pool->stop = false;
 	if (initialize_threads(&threads, number_of_philosophers) == false)
