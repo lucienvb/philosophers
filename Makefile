@@ -47,24 +47,24 @@ endif
 
 # Source files
 SRC = \
-  utils/ft_atol_with_overflow.c \
-  utils/ft_memcpy.c \
-  initialize/initialize_data_pool.c \
-  utils/parser.c \
-  initialize/initialize_mutex.c \
-  thread/thread_main.c \
-  utils/ft_usleep.c \
-  thread/thread_routine.c \
   actions/diner.c \
   actions/sleeping.c \
-  initialize/initialize_time.c \
-  utils/print.c \
-  utils/check_if_alive.c \
+  initialize/initialize_data_pool.c \
+  initialize/initialize_mutex.c \
   initialize/initialize_philos.c \
-  utils/stop_now.c \
   initialize/initialize_threads.c \
+  initialize/initialize_time.c \
+  thread/thread_main.c \
+  thread/thread_routine.c \
+  utils/check_if_alive.c \
+  utils/ft_atol_with_overflow.c \
+  utils/ft_memcpy.c \
+  utils/ft_usleep.c \
   utils/meal_status.c \
-  utils/mutex_destroy.c
+  utils/mutex_destroy.c \
+  utils/parser.c \
+  utils/print.c \
+  utils/stop_now.c
 
 TEST_SRC = \
   src/utils/parser.c
