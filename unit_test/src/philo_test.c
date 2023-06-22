@@ -25,8 +25,12 @@ Test(parser, exact_five)
 	parser_cases(5, true);
 }
 
-Test(parser, to_high)
+Test(parser, to_six)
 {
-	parser_cases(6, false);
+	parser_cases(6, true);
 }
 
+Test(parser, to_high)
+{
+	parser_cases(7, false);
+}

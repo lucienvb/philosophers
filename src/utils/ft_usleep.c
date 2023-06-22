@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   ft_usleep.c                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: lvan-bus <lvan-bus@student.codam.n>          +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/06/22 14:56:04 by lvan-bus      #+#    #+#                 */
+/*   Updated: 2023/06/22 14:56:06 by lvan-bus      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <philo.h>
 
 // this function returns the time of day in milliseconds
@@ -35,15 +47,15 @@ void	time_sleep_ms(int64_t time_to_sleep)
 // are still alive, if not; it returns false
 bool	time_sleep_and_validate(int64_t time_to_sleep, t_philo *phil)
 {
-    const int64_t	start = time_of_day_ms();
+	const int64_t	start = time_of_day_ms();
 
-    while (1)
+	while (1)
 	{
 		if (time_difference_ms(time_of_day_ms(), start) >= time_to_sleep)
-			break;
+			break ;
 		if (stop_now(phil) == true)
 			return (false);
-        usleep(500);
+		usleep(500);
 	}
-    return (true);
+	return (true);
 }

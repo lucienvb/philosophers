@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   check_if_alive.c                                   :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: lvan-bus <lvan-bus@student.codam.n>          +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/06/22 14:55:36 by lvan-bus      #+#    #+#                 */
+/*   Updated: 2023/06/22 14:55:36 by lvan-bus      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <philo.h>
 
 // TIME MUTEX
@@ -9,7 +21,8 @@
 bool	check_if_alive(t_philo *phil, t_time *time)
 {
 	pthread_mutex_lock(&phil->data_pool->mutex[TIME]);
-	if (time_difference_ms(time_of_day_ms(), time->time_since_last_meal) >= (int64_t) time->time_to_die)
+	if (time_difference_ms(time_of_day_ms(), time->time_since_last_meal)
+		>= (int64_t) time->time_to_die)
 	{
 		if (stop_now(phil) == true)
 		{

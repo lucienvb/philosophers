@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   thread_main.c                                      :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: lvan-bus <lvan-bus@student.codam.n>          +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/06/22 14:37:24 by lvan-bus      #+#    #+#                 */
+/*   Updated: 2023/06/22 14:37:25 by lvan-bus      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <philo.h>
 
 static bool	initialize_thread_main(t_philo **philos, t_public *data_pool,
