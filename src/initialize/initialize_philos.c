@@ -1,5 +1,6 @@
 #include <philo.h>
 
+// this function initializes the (private) philos struct
 void	initialize_philos(t_philo *philos, size_t i, t_public *data_pool, long number_of_philosophers)
 {
 	philos->id = i;

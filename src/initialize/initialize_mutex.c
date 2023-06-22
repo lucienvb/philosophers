@@ -1,6 +1,9 @@
 #include "philo.h"
 
-// check the protections of this function
+// this functions allocates a number of mutexes for a count of
+// number_of_philosophers plus 4 (for e_mutex_index: START, PRINT,
+// TIME, STOP)
+// afterwards, all these mutexes are being initialized
 bool	initialize_mutex(pthread_mutex_t **mutex, size_t number_of_philosophers)
 {
 	size_t i;

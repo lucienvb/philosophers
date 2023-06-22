@@ -49,10 +49,10 @@ endif
 SRC = \
   utils/ft_atol_with_overflow.c \
   utils/ft_memcpy.c \
-  utils/prepare_arguments.c \
+  initialize/initialize_data_pool.c \
   utils/parser.c \
   initialize/initialize_mutex.c \
-  thread/thread_new.c \
+  thread/thread_main.c \
   utils/ft_usleep.c \
   thread/thread_routine.c \
   actions/diner.c \

@@ -18,14 +18,13 @@
 # define ZERO 0
 
 // ENUM
-typedef enum e_mutexindex
+typedef enum e_mutex_index
 {
 	START,
 	PRINT,
 	TIME,
-	SLEEP,
 	STOP,
-}	t_mutexindex;
+}	t_mutex_index;
 
 // TIME
 typedef struct s_time
@@ -66,16 +65,17 @@ typedef struct s_philo
 }					t_philo;
 
 // ACTIONS
-bool diner(t_philo *phil, t_time *time);
+bool diner(t_philo *phil, t_time *time, pthread_mutex_t *first, pthread_mutex_t *second);
 bool sleeping(t_philo *phil, t_time *time);
 
 // FUNCTIONS
 bool	philo(char *str);
 
 // INITIALIZE
-void	initialize_time(t_time *time, t_philo *phil);
+bool 	initialize_data_pool(int argc, char **argv, t_public *data_pool);
 void	initialize_philos(t_philo *philos, size_t i, t_public *data_pool, long number_of_philosophers);
 bool	initialize_threads(pthread_t **thread, size_t number_of_philosophers);
+void	initialize_time(t_time *time, t_philo *phil);
 
 // MUTEX
 bool	initialize_mutex(pthread_mutex_t **mutex, size_t number_of_philosophers);
@@ -83,11 +83,9 @@ bool	mutex_destroy(pthread_mutex_t *mutex, size_t number_of_philosophers);
 
 // THREAD
 void    thread_print_result(size_t number_of_philosopherss, char **thread_result);
-int 	thread_main(t_public *data_pool);
 bool	thread_join(size_t number_of_philosopherss, pthread_t *thread, char **thread_result);
-void	thread_create(t_philo *philos, pthread_t *thread, long number_of_philosophers);
 void	*thread_routine(void *tmp);
-int		thread_main_new(t_public *data_pool, long number_of_philosophers);
+int		thread_main(t_public *data_pool, long number_of_philosophers);
 
 // TIME
 int64_t	time_difference_ms(int64_t end, int64_t start);
@@ -98,7 +96,6 @@ bool	time_sleep_and_validate(int64_t time_to_sleep, t_philo *phil);
 // UTILS
 bool	ft_atol_with_overflow(const char *str, long *result);
 void	*ft_memcpy(void *dst, void *src, size_t n);
-bool 	prepare_arguments(int argc, char **argv, t_public *data_pool);
 bool	parser(int argc);
 bool	stop_now(t_philo *phil);
 bool	print(pthread_mutex_t *print, t_philo *phil, char *message, int64_t start);
