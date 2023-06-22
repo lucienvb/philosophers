@@ -29,8 +29,9 @@ bool	check_if_alive(t_philo *phil, t_time *time)
 			pthread_mutex_unlock(&phil->data_pool->mutex[TIME]);
 			return (false);
 		}
-		print(&phil->data_pool->mutex[PRINT], phil, "died", time->start);
 		meal_status(phil, 0, 1);
+		printf("%ld %ld died\n", (long) time_difference_ms(time_of_day_ms(),
+				time->start), phil->id);
 		pthread_mutex_unlock(&phil->data_pool->mutex[TIME]);
 		return (false);
 	}
