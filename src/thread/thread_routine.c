@@ -22,19 +22,22 @@ static void	initialize_routine(t_philo *phil, t_time *time)
 	time->time_since_last_meal = time_of_day_ms();
 }
 
-void	*thread_routine(void *arg)
+static void	uneven_group(t_philo *phil, t_time time)
 {
-	t_philo	*phil;
-	t_time	time;
-
-	phil = (t_philo *)arg;
-	initialize_routine(phil, &time);
-	if (phil->id % 2 != 0)
+	while (1)
 	{
+		if (sleeping(phil, &time) == false)
+			break ;
 		if (print(&phil->data_pool->mutex[PRINT], phil, "is thinking",
-				time.start) == false)
-			time_sleep_ms(time.time_to_eat);
+				  time.start) == false)
+			break ;
+		if (diner(phil, &time, phil->right, phil->left) == false)
+			break ;
 	}
+}
+
+static void	even_group(t_philo *phil, t_time time)
+{
 	while (1)
 	{
 		if (diner(phil, &time, phil->right, phil->left) == false)
@@ -42,8 +45,21 @@ void	*thread_routine(void *arg)
 		if (sleeping(phil, &time) == false)
 			break ;
 		if (print(&phil->data_pool->mutex[PRINT], phil, "is thinking",
-				time.start) == false)
+				  time.start) == false)
 			break ;
 	}
+}
+
+void	*thread_routine(void *arg)
+{
+	t_philo	*phil;
+	t_time	time;
+
+	phil = (t_philo *)arg;
+	initialize_routine(phil, &time);
+	if (phil->id % 2 != 1)
+		uneven_group(phil, time);
+	else
+		even_group(phil, time);
 	return (NULL);
 }
