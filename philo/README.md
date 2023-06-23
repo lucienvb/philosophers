@@ -1,0 +1,3 @@
+# philosophers
+
+not finished yet
