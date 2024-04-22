@@ -1,5 +1,9 @@
 # philosophers
 
+**Quick start**
+- Compile: make (in the folder with the Makefile)
+- Run: ./philo 4 400 300 200 (for example)
+
 **Project Documentation - Dining Philosophers**
 
 **1. Introduction:**
