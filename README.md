@@ -2,7 +2,7 @@
 
 **Quick start**
 - Compile: make (in the folder with the Makefile)
-- Run: ./philo 4 400 300 200 (for example)
+- Run: ./philo 4 400 300 200 (for example)<br><br>
 
 **Project Documentation - Dining Philosophers**
 
